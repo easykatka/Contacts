@@ -11,6 +11,7 @@ import { Typography } from "@material-ui/core";
 import format from "date-fns/format";
 import parseISO from "date-fns/parseISO";
 import {CopyToClipboardtext} from "../../../components/CopyToClipboardText";
+import {NATIONALITY_HUMAN_NAME} from '../../../constants/nationality'
 
 const useStyles = makeStyles({
   table: {},
@@ -41,6 +42,7 @@ export const ContactsTable = ({ data }) => {
               </TableCell>
               <TableCell>
                 {item.name.title}
+				{" "}
                 {item.name.first}
                 {item.name.last}
               </TableCell>
@@ -57,8 +59,8 @@ export const ContactsTable = ({ data }) => {
               <TableCell>
                 <CopyToClipboardtext text={item.phone} />
               </TableCell>
-              <TableCell>{item.location.city}</TableCell>
-              <TableCell align="right">{item.location.country}</TableCell>
+              <TableCell>{item.location.country}{" "} {item.location.street.name}, {item.location.street.number}</TableCell>
+              <TableCell align="right">{NATIONALITY_HUMAN_NAME[item.nat]}</TableCell>
             </TableRow>
           ))}
         </TableBody>
