@@ -8,15 +8,16 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 import { Typography } from "@material-ui/core";
-import format from 'date-fns/format'
-import parseISO from 'date-fns/parseISO'
+import format from "date-fns/format";
+import parseISO from "date-fns/parseISO";
+import {CopyToClipboardtext} from "../../../components/CopyToClipboardText";
 
 const useStyles = makeStyles({
   table: {},
 });
 
 export const ContactsTable = ({ data }) => {
-	console.log(data)
+  console.log(data);
   const classes = useStyles();
   return (
     <TableContainer component={Paper}>
@@ -35,7 +36,7 @@ export const ContactsTable = ({ data }) => {
         <TableBody>
           {data.map((item) => (
             <TableRow key={item.login.uuid}>
-              <TableCell >
+              <TableCell>
                 <Avatar alt="" src={item.picture.thumbnail} />
               </TableCell>
               <TableCell>
@@ -44,13 +45,20 @@ export const ContactsTable = ({ data }) => {
                 {item.name.last}
               </TableCell>
               <TableCell>
-			  <Typography> {format(parseISO (item.dob.date), 'MM/dd/yyyy')} </Typography>
+                <Typography>
+                  {" "}
+                  {format(parseISO(item.dob.date), "MM/dd/yyyy")}{" "}
+                </Typography>
                 <Typography>{item.dob.age}years </Typography>
               </TableCell>
-			  <TableCell>{item.email}</TableCell>
-              <TableCell>{item.phone}</TableCell>
+              <TableCell>
+                <CopyToClipboardtext text={item.email} />
+              </TableCell>
+              <TableCell>
+                <CopyToClipboardtext text={item.phone} />
+              </TableCell>
               <TableCell>{item.location.city}</TableCell>
-              <TableCell align='right'>{item.location.country}</TableCell>
+              <TableCell align="right">{item.location.country}</TableCell>
             </TableRow>
           ))}
         </TableBody>
