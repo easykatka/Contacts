@@ -13,12 +13,12 @@ import parseISO from "date-fns/parseISO";
 import {CopyToClipboardtext} from "../../../components/CopyToClipboardText";
 import {NATIONALITY_HUMAN_NAME} from '../../../constants/nationality'
 
+
 const useStyles = makeStyles({
   table: {},
 });
 
 export const ContactsTable = ({ data }) => {
-  console.log(data);
   const classes = useStyles();
   return (
     <TableContainer component={Paper}>
