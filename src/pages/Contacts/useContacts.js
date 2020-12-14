@@ -1,3 +1,4 @@
+// кастомный хук для фетча данных ,который вернет data , isLoading и isError значения
 import { useState, useEffect } from "react";
 
 export const useContacts = () => {
@@ -22,6 +23,7 @@ export const useContacts = () => {
 		  setisLoading(false);
 		}
 	  };
+	  //запуск функции при маунте приложения
 	  getContacts();
 	}, []);
 	return {

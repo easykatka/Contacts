@@ -16,23 +16,24 @@ export const ToggleDataViewMode = ({ dataViewMode, setdataViewMode }) => {
   );
   //return
   return (
-    <ToggleButtonGroup
-      orientation="vertical"
+    <ToggleButtonGroup size='small'
+      orientation="horizontal"
       value={dataViewMode}
       exclusive
       onChange={handleChangeViewMode}
     >
-      <ToggleButton
-        value={DATA_VIEW_MODE.GRID}
-        aria-label={DATA_VIEW_MODE.GRID}
-      >
-        <ViewListIcon />
-      </ToggleButton>
+
       <ToggleButton
         value={DATA_VIEW_MODE.TABLE}
         aria-label={DATA_VIEW_MODE.TABLE}
       >
         <ViewModuleIcon />
+      </ToggleButton>
+	  <ToggleButton
+        value={DATA_VIEW_MODE.GRID}
+        aria-label={DATA_VIEW_MODE.GRID}
+      >
+        <ViewListIcon />
       </ToggleButton>
     </ToggleButtonGroup>
   );

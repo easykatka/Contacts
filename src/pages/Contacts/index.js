@@ -9,6 +9,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import {ToggleDataViewMode} from './ToggleDataViewMode'
 import {DATA_VIEW_MODE} from './constants'
 import {useDataViewMode} from './useDataViewMode'
+import {SearchPanel} from './SearchPanel'
 // styles
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -36,6 +37,13 @@ export const Contacts = () => {
 		  <ToggleDataViewMode dataViewMode={dataViewMode} setdataViewMode={setdataViewMode} DATA_VIEW_MODE={DATA_VIEW_MODE}/>
           </Box>
         </Grid>
+
+		<Grid item xs={12} className={classes.headContainer}>
+		<Box display="flex" justifyContent="space-between">
+          <SearchPanel/>
+        </Box>
+        </Grid>
+
         <Grid item xs={12}>
           {(() => {
             if (contacts.isLoading) {
