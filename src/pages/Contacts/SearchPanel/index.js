@@ -1,5 +1,6 @@
 // TODO searchpanel
 
 export const SearchPanel = () => {
-  <div>search</div>;
+	return (
+  <div>seardsdch</div>)
 };

@@ -40,7 +40,7 @@ export const Contacts = () => {
 
 		<Grid item xs={12} className={classes.headContainer}>
 		<Box display="flex" justifyContent="space-between">
-          <SearchPanel/>
+		<SearchPanel/>
         </Box>
         </Grid>
 
