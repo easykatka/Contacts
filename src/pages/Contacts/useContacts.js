@@ -6,7 +6,7 @@ export const useContacts = () => {
 	const [isLoading, setisLoading] = useState(true);
 	const [isError, setisError] = useState(false);
   
-	useEffect(() => {
+	
 	  const getContacts = async () => {
 		try {
 		  setisLoading(true);
@@ -24,11 +24,10 @@ export const useContacts = () => {
 		}
 	  };
 	  //запуск функции при маунте приложения
-	  getContacts();
-	}, []);
-	return {
+	  ;
+	
+	return [getContacts,
 	  data,
 	  isLoading,
-	  isError,
-	};
+	  isError]
   };

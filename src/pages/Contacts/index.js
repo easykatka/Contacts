@@ -1,5 +1,6 @@
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { useContacts } from "./useContacts";
@@ -10,21 +11,27 @@ import {ToggleDataViewMode} from './ToggleDataViewMode'
 import {DATA_VIEW_MODE} from './constants'
 import {useDataViewMode} from './useDataViewMode'
 import {SearchPanel} from './SearchPanel'
+import RefreshIcon from '@material-ui/icons/Refresh'
+import {useEffect} from 'react'
 // styles
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {},
     headContainer: {
-		marginTop : theme.spacing(4),
-      marginBottom: theme.spacing(3),
+		marginTop : theme.spacing(3),
+
+		
     },
   })
 );
 //body
 export const Contacts = () => {
   const classes = useStyles();
-  const contacts = useContacts();
+  const [getContacts,data,isLoading,isError] = useContacts();
   const [dataViewMode, setdataViewMode] = useDataViewMode();
+  useEffect(() => {
+	  getContacts()
+  }, []);
 //return
   return (
     <Container className={classes.root}>
@@ -34,7 +41,12 @@ export const Contacts = () => {
           <Typography variant="h5" component="h1">
             Contacts
           </Typography>
+		  <Box  display="flex" >
+		  <Button onClick={() => getContacts()}>
+		  <RefreshIcon/>
+		  </Button>
 		  <ToggleDataViewMode dataViewMode={dataViewMode} setdataViewMode={setdataViewMode} DATA_VIEW_MODE={DATA_VIEW_MODE}/>
+		  </Box>
           </Box>
         </Grid>
 
@@ -46,14 +58,14 @@ export const Contacts = () => {
 
         <Grid item xs={12}>
           {(() => {
-            if (contacts.isLoading) {
+            if (isLoading) {
               return <LinearProgress />;
             }
-            if (contacts.isError) {
+            if (isError) {
               return <div>Error</div>;
             }
             if (dataViewMode === DATA_VIEW_MODE.TABLE) {
-              return <ContactsTable data={contacts.data} />;
+              return <ContactsTable data={data} />;
             }
             if (dataViewMode === DATA_VIEW_MODE.GRID) {
               return "grid";
