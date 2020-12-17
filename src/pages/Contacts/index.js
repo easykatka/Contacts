@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     root: {},
     headContainer: {
-	  margin: theme.spacing(2),
+	  marginTop: theme.spacing(2),
 	  
 	},
 	refresh_button: {
