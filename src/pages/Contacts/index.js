@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     root: {},
     headContainer: {
-      marginTop: theme.spacing(3),
+	  margin: theme.spacing(2),
+	  
 	},
 	refresh_button: {
 		marginRight: theme.spacing(1),
@@ -60,7 +61,7 @@ export const Contacts = () => {
           </Box>
         </Grid>
 
-        <Grid item xs={12} className={classes.headContainer}>
+        <Grid item xs={12} >
           <Box display="flex" justifyContent="space-between">
             <SearchPanel />
           </Box>

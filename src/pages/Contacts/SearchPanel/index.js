@@ -18,10 +18,14 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		paddingBottom:theme.spacing(2),
 	},
-  input_item: { width: "100%" ,minWidth:theme.spacing(25)},
+  input_item: {  minWidth:theme.spacing(40),},
   clear_btn: {
 	  width:'100%',
   height:'100%',
+  },
+  paper: {
+	  width: '100%',
+	  padding:theme.spacing(1)
   }
 }));
 
@@ -29,9 +33,10 @@ export const SearchPanel = () => {
   const classes = useStyles();
   return (
     <Grid container className={classes.root}>
+		<Paper className={classes.paper}>
       <Grid container spacing={3}>
         <Grid item xs>
-          <OutlinedInput
+          <OutlinedInput 
             size="small"
             className={classes.input_item}
             placeholder="Search by full name"
@@ -41,11 +46,11 @@ export const SearchPanel = () => {
                 <SearchIcon />
               </InputAdornment>
             }
-            size="small"
+            
           />
         </Grid>
         <Grid item xs>
-          <FormControl variant="outlined" className={classes.input_item}>
+          <FormControl  variant="outlined" className={classes.input_item}>
             <InputLabel>Gender</InputLabel>
             <Select label="Gender">
               <MenuItem value={"all"}>All</MenuItem>
@@ -56,16 +61,17 @@ export const SearchPanel = () => {
         </Grid>
         <Grid item xs>
           <OutlinedInput
-            size="small"
+            
             className={classes.input_item}
             placeholder="Nationality"
-            size="small"
+            
           />
         </Grid>
         <Grid item xs >
-          <Button className={classes.clear_btn}> Clear</Button>
+          <Button size='small' className={classes.clear_btn}> Clear</Button>
         </Grid>
       </Grid>
+	  </Paper>
     </Grid>
   );
 };
