@@ -1,9 +1,7 @@
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { useContacts } from "./useContacts";
 import Typography from "@material-ui/core/Typography";
 import { ContactsTable } from "./ContactsTable";
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -14,6 +12,12 @@ import { SearchPanel } from "./SearchPanel";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import { useEffect } from "react";
 import IconButton from "@material-ui/core/IconButton";
+
+import ContactsStore from '../../store/contactsStore'
+import { observer } from "mobx-react-lite";
+import SearchPanelStore from '../../store/searchPanelStore'
+
+
 // styles
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -28,13 +32,21 @@ const useStyles = makeStyles((theme) =>
   })
 );
 //body
-export const Contacts = () => {
+export const Contacts = observer (() => { 
   const classes = useStyles();
-  const [getContacts, data, isLoading, isError] = useContacts();
+  const {getContacts , users, isLoading , isError} = ContactsStore
   const [dataViewMode, setdataViewMode] = useDataViewMode();
+  const {filter} = SearchPanelStore
+  console.log(users)
+const filteredUsers = users
+				   .filter(user => filter.gender === "all" || user.gender === filter.gender)
+				  
+                   
+
   useEffect(() => {
     getContacts();
   }, []);
+
   //return
   return (
     <Container className={classes.root}>
@@ -60,13 +72,11 @@ export const Contacts = () => {
             </Box>
           </Box>
         </Grid>
-
         <Grid item xs={12} >
           <Box display="flex" justifyContent="space-between">
             <SearchPanel />
           </Box>
         </Grid>
-
         <Grid item xs={12}>
           {(() => {
             if (isLoading) {
@@ -76,7 +86,7 @@ export const Contacts = () => {
               return <div>Error</div>;
             }
             if (dataViewMode === DATA_VIEW_MODE.TABLE) {
-              return <ContactsTable data={data} />;
+              return <ContactsTable data={filteredUsers} />;
             }
             if (dataViewMode === DATA_VIEW_MODE.GRID) {
               return "grid";
@@ -86,5 +96,6 @@ export const Contacts = () => {
         </Grid>
       </Grid>
     </Container>
-  );
-};
+  )
+}
+)
