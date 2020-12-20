@@ -16,6 +16,8 @@ import {NATIONALITY_HUMAN_NAME} from '../../../constants/nationality'
 
 const useStyles = makeStyles({
   table: {},
+  row: { "& *": {padding: "2px"}
+  }
 });
 
 export const ContactsTable = ({ data }) => {
@@ -36,22 +38,17 @@ export const ContactsTable = ({ data }) => {
         </TableHead>
         <TableBody>
           {data.map((item) => (
-            <TableRow key={item.login.uuid}>
-              <TableCell>
+            <TableRow key={item.login.uuid} className={classes.row}>
+              <TableCell >
                 <Avatar alt="" src={item.picture.thumbnail} />
               </TableCell>
-              <TableCell>
-                {item.name.title}
-				{" "}
-                {item.name.first}
-                {item.name.last}
+              <TableCell> {`${item.name.title} ${item.name.first} ${item.name.last}`}
               </TableCell>
               <TableCell>
                 <Typography>
-                  {" "}
-                  {format(parseISO(item.dob.date), "MM/dd/yyyy")}{" "}
+            {format(parseISO(item.dob.date), "MM/dd/yyyy")}{" "}
                 </Typography>
-                <Typography>{item.dob.age}years </Typography>
+                <Typography>{`${item.dob.age} years`} </Typography>
               </TableCell>
               <TableCell>
                 <CopyToClipboardtext text={item.email} />

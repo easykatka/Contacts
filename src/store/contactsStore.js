@@ -20,8 +20,10 @@ class ContactsStore {
     } catch (e) {
       this.isError = true;
     } finally {
-      this.isLoading = false;
-    }
+	  this.isLoading = false;
+	  
+	}
+	console.log(this.users)
   };
 }
 

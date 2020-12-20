@@ -37,9 +37,12 @@ export const Contacts = observer (() => {
   const {getContacts , users, isLoading , isError} = ContactsStore
   const [dataViewMode, setdataViewMode] = useDataViewMode();
   const {filter} = SearchPanelStore
-  console.log(users)
+
 const filteredUsers = users
 				   .filter(user => filter.gender === "all" || user.gender === filter.gender)
+				   .filter(user => { 
+					if((user.name.first.toLowerCase() + ' '+ user.name.last.toLowerCase()).includes(filter.searchText.toLowerCase()) )
+					return true})
 				  
                    
 
