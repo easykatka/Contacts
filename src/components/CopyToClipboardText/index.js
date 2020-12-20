@@ -10,7 +10,8 @@ import { useCallback, useState } from "react";
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      cursor: "pointer",
+	  cursor: "pointer",
+	  textTransform:'lowercase',
     },
     icon: {
       marginRight: theme.spacing(1),
@@ -34,11 +35,11 @@ export const CopyToClipboardtext = ({ text }) => {
   const onClickCopy = useCallback(() => {
     copyToClipboard(text);
     setStatusCopy(STATUS_COPY.COPIED);
-  }, [copyToClipboard]);
+  }, [copyToClipboard ,text]);
   
   const onClickAway = useCallback(() => {
     setStatusCopy(STATUS_COPY.COPY);
-  }, [copyToClipboard]);
+  }, [setStatusCopy]);
 
   return (
     <ClickAwayListener onClickAway={onClickAway}>

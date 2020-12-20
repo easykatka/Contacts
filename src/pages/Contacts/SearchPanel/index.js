@@ -1,4 +1,3 @@
-// TODO searchpanel
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import SearchIcon from "@material-ui/icons/Search";
@@ -10,11 +9,9 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
-
 import SearchPanelStore from "../../../store/searchPanelStore";
 import { observer } from "mobx-react-lite";
-import {useEffect} from 'react'
-
+// стили
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingBottom: theme.spacing(2),
@@ -29,10 +26,10 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
 }));
-
-export const SearchPanel = observer (() => {
+//body
+export const SearchPanel = observer(() => {
   const classes = useStyles();
-  const {filter} = SearchPanelStore
+  const { filter } = SearchPanelStore;
   return (
     <Grid container className={classes.root}>
       <Paper className={classes.paper}>
@@ -43,8 +40,7 @@ export const SearchPanel = observer (() => {
             <OutlinedInput
               size="small"
               value={filter.searchText}
-              onChange={(e) =>
-				(filter.searchText = e.target.value )}
+              onChange={(e) => (filter.searchText = e.target.value)}
               className={classes.input_item}
               placeholder="Search by full name"
               endAdornment={
@@ -61,8 +57,7 @@ export const SearchPanel = observer (() => {
               <Select
                 label="Gender"
                 value={filter.gender}
-                onClick={(e) =>
-					filter.gender = e.target.value }
+                onClick={(e) => (filter.gender = e.target.value)}
               >
                 <MenuItem value={"all"}>All</MenuItem>
                 <MenuItem value={"male"}>Male</MenuItem>
@@ -74,8 +69,7 @@ export const SearchPanel = observer (() => {
           <Grid item xs>
             <OutlinedInput
               value={filter.nationality}
-              onChange={(e) =>
-                filter.nationality = e.target.value}
+              onChange={(e) => (filter.nationality = e.target.value)}
               className={classes.input_item}
               placeholder="Nationality"
             />
@@ -85,8 +79,11 @@ export const SearchPanel = observer (() => {
             <Button
               size="small"
               className={classes.clear_btn}
-              onClick={() =>
-                (filter.searchText = "", filter.gender = "all", filter.nationality = "" )}
+              onClick={() => (
+                (filter.searchText = ""),
+                (filter.gender = "all"),
+                (filter.nationality = "")
+              )}
             >
               Clear
             </Button>
@@ -95,6 +92,5 @@ export const SearchPanel = observer (() => {
         </Grid>
       </Paper>
     </Grid>
-  )
-}
-)
+  );
+});

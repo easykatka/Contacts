@@ -12,43 +12,54 @@ import { SearchPanel } from "./SearchPanel";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import { useEffect } from "react";
 import IconButton from "@material-ui/core/IconButton";
+import { NATIONALITY_HUMAN_NAME } from "../../constants/nationality";
 
-import ContactsStore from '../../store/contactsStore'
+import ContactsStore from "../../store/contactsStore";
 import { observer } from "mobx-react-lite";
-import SearchPanelStore from '../../store/searchPanelStore'
-
+import SearchPanelStore from "../../store/searchPanelStore";
 
 // styles
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {},
     headContainer: {
-	  marginTop: theme.spacing(2),
-	  
-	},
-	refresh_button: {
-		marginRight: theme.spacing(1),
-	},
+      marginTop: theme.spacing(2),
+    },
+    refresh_button: {
+      marginRight: theme.spacing(1),
+    },
   })
 );
 //body
-export const Contacts = observer (() => { 
+export const Contacts = observer(() => {
   const classes = useStyles();
-  const {getContacts , users, isLoading , isError} = ContactsStore
+  const { getContacts, users, isLoading, isError } = ContactsStore;
   const [dataViewMode, setdataViewMode] = useDataViewMode();
-  const {filter} = SearchPanelStore
+  const { filter } = SearchPanelStore;
 
-const filteredUsers = users
-				   .filter(user => filter.gender === "all" || user.gender === filter.gender)
-				   .filter(user => { 
-					if((user.name.first.toLowerCase() + ' '+ user.name.last.toLowerCase()).includes(filter.searchText.toLowerCase()) )
-					return true})
-				  
-                   
+  const filteredUsers = users
+    .filter((user) => filter.gender === "all" || user.gender === filter.gender)
+    .filter((user) => {
+      if (
+        (
+          user.name.first.toLowerCase() +
+          " " +
+          user.name.last.toLowerCase()
+        ).includes(filter.searchText.toLowerCase())
+      )
+        return true;
+    })
+    .filter((user) => {
+      if (
+        NATIONALITY_HUMAN_NAME[user.nat].toLowerCase().includes(
+          filter.nationality.toLowerCase())
+      )
+        return true;
+    });
 
   useEffect(() => {
     getContacts();
-  }, []);
+  }, [getContacts]);
 
   //return
   return (
@@ -60,9 +71,9 @@ const filteredUsers = users
               Contacts
             </Typography>
             <Box display="flex">
-              <IconButton className={classes.refresh_button}
+              <IconButton
+                className={classes.refresh_button}
                 aria-label="refresh"
-                
                 onClick={() => getContacts()}
               >
                 <RefreshIcon />
@@ -75,7 +86,7 @@ const filteredUsers = users
             </Box>
           </Box>
         </Grid>
-        <Grid item xs={12} >
+        <Grid item xs={12}>
           <Box display="flex" justifyContent="space-between">
             <SearchPanel />
           </Box>
@@ -99,6 +110,5 @@ const filteredUsers = users
         </Grid>
       </Grid>
     </Container>
-  )
-}
-)
+  );
+});
