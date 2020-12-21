@@ -1,9 +1,8 @@
 //кастом хук , который устанавливает стейт в компонент Contacts
-//1. проверяет локал сторадж ,если ничего нет , то устанавливает табличный вид
-//2. при изменении вида ,срабатывает useEffect и меняет значение в объекте
+//1. проверяет local storage,если ничего нет , то устанавливает табличный вид
+//2. при изменении вида ,срабатывает useEffect и меняет значение в localstorage
 
-//! баг при повторном нажатии 
-import {DATA_VIEW_MODE} from '../../constants/constants'
+import {DATA_VIEW_MODE} from '../../constants'
 import { useState ,useEffect } from "react";
 
 const getInitialDataViewMode = () => {
@@ -11,8 +10,10 @@ const getInitialDataViewMode = () => {
 }
 export const useDataViewMode = () => { 
 	const [dataViewMode, setdataViewMode] = useState(getInitialDataViewMode);
+
 	useEffect(() => {
-		localStorage.setItem('dataViewMode',dataViewMode)
-	}, [dataViewMode, setdataViewMode]);
+		localStorage.setItem('dataViewMode',dataViewMode) 
+	}, [dataViewMode , setdataViewMode]);
+	
 	return [dataViewMode, setdataViewMode]
 }

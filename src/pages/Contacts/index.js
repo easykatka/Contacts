@@ -1,23 +1,25 @@
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import { ContactsTable } from "./ContactsTable";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import RefreshIcon from "@material-ui/icons/Refresh";
+import IconButton from "@material-ui/core/IconButton";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
+import Pagination from '@material-ui/lab/Pagination';
+
+import { ContactsTable } from "./ContactsTable";
 import { ToggleDataViewMode } from "./ToggleDataViewMode";
-import { DATA_VIEW_MODE } from "../../constants/constants";
+import { DATA_VIEW_MODE } from "../../constants";
 import { useDataViewMode } from "./useDataViewMode";
 import { SearchPanel } from "./SearchPanel";
-import RefreshIcon from "@material-ui/icons/Refresh";
 import { useEffect } from "react";
-import IconButton from "@material-ui/core/IconButton";
-import { NATIONALITY_HUMAN_NAME } from "../../constants/nationality";
+import { NATIONALITY_HUMAN_NAME } from "../../constants";
 import ContactsStore from "../../store/contactsStore";
 import { observer } from "mobx-react-lite";
 import SearchPanelStore from "../../store/searchPanelStore";
 import { ContactsCards } from "./ContactsCards";
-import Pagination from '@material-ui/lab/Pagination';
+
 import {useState} from 'react'
 
 // styles
@@ -113,7 +115,7 @@ console.log(currentPage)
             <SearchPanel />
           </Box>
         </Grid>
-		<Pagination onChange={handleChange} count={pagesCount} />
+		<Pagination page={currentPage} onChange={handleChange} count={pagesCount} />
         <Grid item xs={12}>
           {(() => {
             if (isLoading) {

@@ -11,14 +11,14 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import SearchPanelStore from "../../../store/searchPanelStore";
 import { observer } from "mobx-react-lite";
-import { GENDER } from "../../../constants/gender";
-import { TextField } from "@material-ui/core";
+import { GENDER } from "../../../constants";
+
 // styles
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingBottom: theme.spacing(2),
   },
-  input_item: { minWidth: theme.spacing(47), width: "100%" },
+  input_item: { minWidth: theme.spacing(40), width: "100%" },
   clear_btn: {
     width: "100%",
     height: theme.spacing(5),

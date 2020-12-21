@@ -3,20 +3,22 @@ import { Typography } from "@material-ui/core";
 import format from "date-fns/format";
 import parseISO from "date-fns/parseISO";
 import { CopyToClipboardtext } from "../../../components/CopyToClipboardText";
-import { NATIONALITY_HUMAN_NAME } from "../../../constants/nationality";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
-import { NATIONALITY_HUMAN_COLOR } from "../../../constants/nationality";
+import {
+  NATIONALITY_HUMAN_COLOR,
+  NATIONALITY_HUMAN_NAME,
+} from "../../../constants";
 import searchPanelStore from "../../../store/searchPanelStore";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   card: {
     whiteSpace: "pre-line",
-	minHeight: theme.spacing(20),
-	textAlign: "center",
-	margin:'0 auto'
+    minHeight: theme.spacing(20),
+    textAlign: "center",
+    margin: "0 auto",
   },
   large: {
     width: theme.spacing(10),
@@ -25,25 +27,25 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "50%",
   },
 }));
-
 export const ContactsCards = ({ data }) => {
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.card}> 
+    <Grid container className={classes.card}>
       {data.map((item) => (
         <Grid item xs={12} lg={3} sm={6} key={item.login.uuid}>
-          <Card variant="outlined" >
-            <CardContent  >
+          <Card variant="outlined">
+            <CardContent>
               <img
                 alt=""
                 src={item.picture.thumbnail}
                 className={classes.large}
               />
-              <Typography >
+              <Typography>
                 {`${item.name.title} ${item.name.first} ${item.name.last}`}
               </Typography>
-			  <Button className={classes.nat}
+              <Button
+                className={classes.nat}
                 onClick={() =>
                   (searchPanelStore.filter.nationality =
                     NATIONALITY_HUMAN_NAME[item.nat])
@@ -55,10 +57,9 @@ export const ContactsCards = ({ data }) => {
               <Typography>
                 {format(parseISO(item.dob.date), "MM/dd/yyyy")}
               </Typography>
-              <Typography>{`${item.dob.age} years`} </Typography>
-				
+              <Typography>{`${item.dob.age} years`}</Typography>
               <Typography>
-                <CopyToClipboardtext text={item.email} />
+                <CopyToClipboardtext text={item.email} />{" "}
               </Typography>
               <CopyToClipboardtext text={item.phone} />
               <Typography>
