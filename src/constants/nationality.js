@@ -38,3 +38,23 @@ export const NATIONALITY_HUMAN_NAME = {
 	[NATIONALITY.US]: "American"
 
 }
+export const NATIONALITY_HUMAN_COLOR = {
+	[NATIONALITY.AU]: "red",
+	[NATIONALITY.BR]: "pink",
+	[NATIONALITY.CA]: "mediumpurple",
+	[NATIONALITY.CH]: "cyan",
+	[NATIONALITY.DE]: "yellow",
+	[NATIONALITY.DK]: "mistyrose",
+	[NATIONALITY.ES]: "magenta",
+	[NATIONALITY.FI]: "orange",
+	[NATIONALITY.FR]: "olive",
+	[NATIONALITY.GB]: "teal",
+	[NATIONALITY.IE]: "violet",
+	[NATIONALITY.IR]: "plum",
+	[NATIONALITY.NO]: "peru",
+	[NATIONALITY.NL]: "cadetblue",
+	[NATIONALITY.NZ]: "brown",
+	[NATIONALITY.TR]: "silver",
+	[NATIONALITY.US]: "goldenrod"
+
+}

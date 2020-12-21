@@ -6,12 +6,14 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Avatar from "@material-ui/core/Avatar";
 import { Typography } from "@material-ui/core";
 import format from "date-fns/format";
 import parseISO from "date-fns/parseISO";
 import { CopyToClipboardtext } from "../../../components/CopyToClipboardText";
 import { NATIONALITY_HUMAN_NAME } from "../../../constants/nationality";
+import { NATIONALITY_HUMAN_COLOR } from "../../../constants/nationality";
+import searchPanelStore from '../../../store/searchPanelStore'
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   table: {},
@@ -23,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
   },
   name : {
 	color: 'dodgerBlue'
+  },
+  nat: {
+	  cursor:'pointer'
   }
 }))
 
@@ -71,13 +76,14 @@ export const ContactsTable = ({ data }) => {
 			  <CopyToClipboardtext blackcolor={true} text={`/${item.location.country}/ 
 			   ${item.location.street.name} ${item.location.street.number}`} />
               </TableCell>
-              <TableCell align="right">
-                <Typography>{NATIONALITY_HUMAN_NAME[item.nat]}</Typography>
+              <TableCell align="right" className={classes.nat}>
+			  <Button  onClick={() => searchPanelStore.filter.nationality = NATIONALITY_HUMAN_NAME[item.nat]} style={{backgroundColor:NATIONALITY_HUMAN_COLOR[item.nat]}}>
+                {NATIONALITY_HUMAN_NAME[item.nat]}</Button>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-  );
-};
+  )
+}

@@ -8,13 +8,16 @@ import { NATIONALITY_HUMAN_NAME } from "../../../constants/nationality";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
+import { NATIONALITY_HUMAN_COLOR } from "../../../constants/nationality";
+import searchPanelStore from '../../../store/searchPanelStore'
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   card: {
 
 	 whiteSpace: "pre-line",
 	 padding:theme.spacing(3),
-	 height:theme.spacing(40),
+	 height:theme.spacing(45),
 	textAlign:"center"
 
 
@@ -36,8 +39,8 @@ export const ContactsCards = ({ data }) => {
     <Grid container>
       {data.map((item) => (
      
-	 <Grid item  xs={12} lg={3} sm={6} >
-            <Card   key={item.login.uuid} variant="outlined">
+	 <Grid item  xs={12} lg={3} sm={6} key={item.login.uuid}>
+            <Card    variant="outlined">
               <CardContent className={classes.card} >
 				 
                 <img
@@ -60,8 +63,9 @@ export const ContactsCards = ({ data }) => {
                 <Typography>
 				<CopyToClipboardtext blackcolor={true} text={`/${item.location.country}/ 
 			   ${item.location.street.name} ${item.location.street.number}`} />
-                </Typography>
-                {NATIONALITY_HUMAN_NAME[item.nat]}
+                </Typography >
+				<Button  onClick={() => searchPanelStore.filter.nationality = NATIONALITY_HUMAN_NAME[item.nat]} style={{backgroundColor:NATIONALITY_HUMAN_COLOR[item.nat]}}>
+                {NATIONALITY_HUMAN_NAME[item.nat]}</Button>
               </CardContent>
             </Card>
 			</Grid>
