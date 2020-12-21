@@ -8,14 +8,21 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { useCallback, useState } from "react";
 
 const useStyles = makeStyles((theme) =>
+
   createStyles({
+	
     root: {
 	  cursor: "pointer",
-	  textTransform:'lowercase',
+	  textTransform: "none",
+	  color : 'dodgerBlue',
+	  whiteSpace: "pre-line",
+	  textAlign:'left'
     },
     icon: {
       marginRight: theme.spacing(1),
-    },
+	},
+	black:{
+	color:'black'}
   })
 );
 const STATUS_COPY = {
@@ -27,10 +34,11 @@ const TITLE_BY_STATUS = {
 	[STATUS_COPY.COPIED]: 'Copied'
 }
 
-export const CopyToClipboardtext = ({ text }) => {
+export const CopyToClipboardtext = ({blackcolor, text }) => {
   const [, copyToClipboard] = useCopyToClipboard();
   const classes = useStyles();
   const [statusCopy, setStatusCopy] = useState(STATUS_COPY.COPY);
+ 
 
   const onClickCopy = useCallback(() => {
     copyToClipboard(text);
@@ -44,14 +52,17 @@ export const CopyToClipboardtext = ({ text }) => {
   return (
     <ClickAwayListener onClickAway={onClickAway}>
       <Tooltip title={TITLE_BY_STATUS[statusCopy]} arrow placement="top">
-        <Button className={classes.root} onClick={onClickCopy}>
-          <FileCopyOutlinedIcon fontSize="small" className={classes.icon} />
+        <Button  className={classes.root} onClick={onClickCopy}>
+          <FileCopyOutlinedIcon  className={classes.icon} />
+		  <div className={blackcolor ? `${classes.black}` : null}>
           {text}
+		  </div>
         </Button>
       </Tooltip>
     </ClickAwayListener>
   );
 };
+
 CopyToClipboardtext.propTypes = {
   text: propsTypes.string.isRequired,
 };

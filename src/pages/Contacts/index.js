@@ -6,17 +6,17 @@ import Typography from "@material-ui/core/Typography";
 import { ContactsTable } from "./ContactsTable";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { ToggleDataViewMode } from "./ToggleDataViewMode";
-import { DATA_VIEW_MODE } from "./constants";
+import { DATA_VIEW_MODE } from "../../constants/constants";
 import { useDataViewMode } from "./useDataViewMode";
 import { SearchPanel } from "./SearchPanel";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import { useEffect } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import { NATIONALITY_HUMAN_NAME } from "../../constants/nationality";
-
 import ContactsStore from "../../store/contactsStore";
 import { observer } from "mobx-react-lite";
 import SearchPanelStore from "../../store/searchPanelStore";
+import {ContactsCards} from "./ContactsCards";
 
 // styles
 const useStyles = makeStyles((theme) =>
@@ -103,7 +103,7 @@ export const Contacts = observer(() => {
               return <ContactsTable data={filteredUsers} />;
             }
             if (dataViewMode === DATA_VIEW_MODE.GRID) {
-              return "grid";
+              return <ContactsCards data={filteredUsers}/>
             }
             return "error";
           })()}

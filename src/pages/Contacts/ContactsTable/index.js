@@ -10,15 +10,21 @@ import Avatar from "@material-ui/core/Avatar";
 import { Typography } from "@material-ui/core";
 import format from "date-fns/format";
 import parseISO from "date-fns/parseISO";
-import {CopyToClipboardtext} from "../../../components/CopyToClipboardText";
-import {NATIONALITY_HUMAN_NAME} from '../../../constants/nationality'
+import { CopyToClipboardtext } from "../../../components/CopyToClipboardText";
+import { NATIONALITY_HUMAN_NAME } from "../../../constants/nationality";
 
-
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   table: {},
-  row: { "& *": {padding: "2px"}
+  row: { "& *:not(img)" : {padding: "2px"  } },
+  small: {
+    width: theme.spacing(5),
+	height: theme.spacing(5),
+	borderRadius:"50%"
+  },
+  name : {
+	color: 'dodgerBlue'
   }
-});
+}))
 
 export const ContactsTable = ({ data }) => {
   const classes = useStyles();
@@ -39,16 +45,21 @@ export const ContactsTable = ({ data }) => {
         <TableBody>
           {data.map((item) => (
             <TableRow key={item.login.uuid} className={classes.row}>
-              <TableCell >
-                <Avatar alt="" src={item.picture.thumbnail} />
+              <TableCell>
+                <img className={classes.small} alt="" src={item.picture.thumbnail} />
               </TableCell>
-              <TableCell> {`${item.name.title} ${item.name.first} ${item.name.last}`}
+              <TableCell>
+			  <Typography className={classes.name}>
+                {`${item.name.title} ${item.name.first} ${item.name.last}`}
+				</Typography>
               </TableCell>
               <TableCell>
                 <Typography>
-            {format(parseISO(item.dob.date), "MM/dd/yyyy")}{" "}
+                  {format(parseISO(item.dob.date), "MM/dd/yyyy")}{" "}
                 </Typography>
-                <Typography>{`${item.dob.age} years`} </Typography>
+                <Typography
+				>{`${item.dob.age} years`}
+				 </Typography>
               </TableCell>
               <TableCell>
                 <CopyToClipboardtext text={item.email} />
@@ -56,8 +67,13 @@ export const ContactsTable = ({ data }) => {
               <TableCell>
                 <CopyToClipboardtext text={item.phone} />
               </TableCell>
-              <TableCell>{item.location.country}{" "} {item.location.street.name}, {item.location.street.number}</TableCell>
-              <TableCell align="right">{NATIONALITY_HUMAN_NAME[item.nat]}</TableCell>
+              <TableCell>
+			  <CopyToClipboardtext blackcolor={true} text={`/${item.location.country}/ 
+			   ${item.location.street.name} ${item.location.street.number}`} />
+              </TableCell>
+              <TableCell align="right">
+                <Typography>{NATIONALITY_HUMAN_NAME[item.nat]}</Typography>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

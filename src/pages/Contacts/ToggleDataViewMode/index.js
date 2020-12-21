@@ -2,7 +2,7 @@ import ViewListIcon from "@material-ui/icons/ViewList";
 import ViewModuleIcon from "@material-ui/icons/ViewModule";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import { DATA_VIEW_MODE } from "../constants";
+import { DATA_VIEW_MODE } from "../../../constants/constants";
 import PropTypes from "prop-types";
 import { useCallback } from "react";
 

@@ -3,7 +3,7 @@
 //2. при изменении вида ,срабатывает useEffect и меняет значение в объекте
 
 
-import {DATA_VIEW_MODE} from './constants'
+import {DATA_VIEW_MODE} from '../../constants/constants'
 import { useState ,useEffect } from "react";
 
 const getInitialDataViewMode = () => {

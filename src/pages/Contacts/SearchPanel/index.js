@@ -11,15 +11,17 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import SearchPanelStore from "../../../store/searchPanelStore";
 import { observer } from "mobx-react-lite";
-// стили
+import { GENDER } from "../../../constants/gender";
+// styles
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingBottom: theme.spacing(2),
   },
-  input_item: { minWidth: theme.spacing(40) },
-  clear_btn: {
+  input_item: { minWidth: theme.spacing(47) },
+  clear_btn: { 
     width: "100%",
-    height: "100%",
+	height: theme.spacing(5),
+	textAlign:'center' 
   },
   paper: {
     width: "100%",
@@ -33,12 +35,12 @@ export const SearchPanel = observer(() => {
   return (
     <Grid container className={classes.root}>
       <Paper className={classes.paper}>
-        {/* контейнер для item */}
         <Grid container spacing={3}>
-          {/* первый инпут */}
-          <Grid item xs>
+          {/* поиск по имени */}
+          <Grid item xs={12} sm={12} md={6} xl={4}>
             <OutlinedInput
-              size="small"
+			  size="small"
+			  fullWidth
               value={filter.searchText}
               onChange={(e) => (filter.searchText = e.target.value)}
               className={classes.input_item}
@@ -51,32 +53,34 @@ export const SearchPanel = observer(() => {
             />
           </Grid>
           {/* выбор пола */}
-          <Grid item xs>
-            <FormControl variant="outlined" className={classes.input_item}>
+          <Grid item item xs={12} sm={12} md={6} xl={4}>
+            <FormControl fullWidth variant="outlined" className={classes.input_item}>
               <InputLabel>Gender</InputLabel>
               <Select
+			  
                 label="Gender"
                 value={filter.gender}
                 onClick={(e) => (filter.gender = e.target.value)}
               >
-                <MenuItem value={"all"}>All</MenuItem>
-                <MenuItem value={"male"}>Male</MenuItem>
-                <MenuItem value={"female"}>Female</MenuItem>
+                <MenuItem value={GENDER.ALL}>All</MenuItem>
+                <MenuItem value={GENDER.MALE}>Male</MenuItem>
+                <MenuItem value={GENDER.FEMALE}>Female</MenuItem>
               </Select>
             </FormControl>
           </Grid>
-          {/* инпут последний */}
-          <Grid item xs>
+          {/* поиск по национальности*/}
+          <Grid item xs={12} sm={12} md={6} xl={4}>
             <OutlinedInput
+			fullWidth
               value={filter.nationality}
               onChange={(e) => (filter.nationality = e.target.value)}
               className={classes.input_item}
               placeholder="Nationality"
             />
           </Grid>
-          {/* кнопка очистки */}
-          <Grid item xs>
-            <Button
+          {/* кнопка очистки инпутов */}
+         
+		  <Button
               size="small"
               className={classes.clear_btn}
               onClick={() => (
@@ -87,8 +91,9 @@ export const SearchPanel = observer(() => {
             >
               Clear
             </Button>
-          </Grid>
           {/* закрывающие теги */}
+         
+		
         </Grid>
       </Paper>
     </Grid>

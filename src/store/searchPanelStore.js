@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+import {GENDER} from "../constants/gender"
 
 class SearchPanelStore {
   filter = {
