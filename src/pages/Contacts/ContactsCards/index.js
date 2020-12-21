@@ -6,19 +6,17 @@ import { CopyToClipboardtext } from "../../../components/CopyToClipboardText";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
-import {
-  NATIONALITY_HUMAN_COLOR,
-  NATIONALITY_HUMAN_NAME,
-} from "../../../constants";
-import searchPanelStore from "../../../store/searchPanelStore";
+import {NATIONALITY_HUMAN_COLOR, NATIONALITY_HUMAN_NAME,} from "../../../constants";
 import Button from "@material-ui/core/Button";
+import store from '../../../store'
 
 const useStyles = makeStyles((theme) => ({
   card: {
+
     whiteSpace: "pre-line",
     minHeight: theme.spacing(20),
     textAlign: "center",
-    margin: "0 auto",
+    marginTop: theme.spacing(1) ,
   },
   large: {
     width: theme.spacing(10),
@@ -47,7 +45,7 @@ export const ContactsCards = ({ data }) => {
               <Button
                 className={classes.nat}
                 onClick={() =>
-                  (searchPanelStore.filter.nationality =
+                  (store.filter.nationality =
                     NATIONALITY_HUMAN_NAME[item.nat])
                 }
                 style={{ backgroundColor: NATIONALITY_HUMAN_COLOR[item.nat] }}

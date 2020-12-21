@@ -14,12 +14,12 @@ import {
   NATIONALITY_HUMAN_NAME,
   NATIONALITY_HUMAN_COLOR,
 } from "../../../constants";
-import searchPanelStore from "../../../store/searchPanelStore";
 import Button from "@material-ui/core/Button";
+import store from '../../../store'
 
 const useStyles = makeStyles((theme) => ({
   table: {},
-  row: { "& *:not(img)": { padding: "2px" } },
+  row: { "&>*:not(img)": { padding: theme.spacing(1/2) , marginLeft:theme.spacing(1) } },
   small: {
     width: theme.spacing(5),
     height: theme.spacing(5),
@@ -86,7 +86,7 @@ export const ContactsTable = ({ data }) => {
               <TableCell align="right" className={classes.nat}>
                 <Button
                   onClick={() =>
-                    (searchPanelStore.filter.nationality =
+                    (store.filter.nationality =
                       NATIONALITY_HUMAN_NAME[item.nat])
                   }
                   style={{ backgroundColor: NATIONALITY_HUMAN_COLOR[item.nat] }}

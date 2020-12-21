@@ -9,7 +9,7 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
-import SearchPanelStore from "../../../store/searchPanelStore";
+import Store from "../../../store";
 import { observer } from "mobx-react-lite";
 import { GENDER } from "../../../constants";
 
@@ -18,22 +18,23 @@ const useStyles = makeStyles((theme) => ({
   root: {
     paddingBottom: theme.spacing(2),
   },
-  input_item: { minWidth: theme.spacing(40), width: "100%" },
+  input_item: { maxHeight:theme.spacing(5) ,minWidth: theme.spacing(40), width: "100%" },
   clear_btn: {
     width: "100%",
     height: theme.spacing(5),
   },
   paper: {
+	width: "100%",
     padding: theme.spacing(2),
   },
 }));
 //body
 export const SearchPanel = observer(() => {
   const classes = useStyles();
-  const { filter } = SearchPanelStore;
+  const { filter } = Store;
   return (
     <Grid container className={classes.root}>
-      <Paper className={classes.paper}>
+      <Paper  className={classes.paper}>
         <Grid container spacing={3}>
           {/* поиск по имени */}
           <Grid item xs={12} sm={12} md={6} xl={4}>
@@ -51,18 +52,18 @@ export const SearchPanel = observer(() => {
             />
           </Grid>
           {/* выбор пола */}
-          <Grid item xs={12} sm={12} md={6} xl={4}>
-            <FormControl variant="outlined" className={classes.input_item}>
+          <Grid item xs={12} sm={12} md={6} xl={4} >
+            <FormControl variant="outlined"className={classes.input_item} >
               <InputLabel id="gender">Gender</InputLabel>
-              <Select
+              <Select className={classes.input_item}
                 id="gender"
                 label="gender"
                 value={filter.gender}
                 onChange={(e) => (filter.gender = e.target.value)}
               >
-                <MenuItem value={GENDER.ALL}>All</MenuItem>
-                <MenuItem value={GENDER.MALE}>Male</MenuItem>
-                <MenuItem value={GENDER.FEMALE}>Female</MenuItem>
+                <MenuItem  value={GENDER.ALL}>All</MenuItem>
+                <MenuItem  value={GENDER.MALE}>Male</MenuItem>
+                <MenuItem  value={GENDER.FEMALE}>Female</MenuItem>
               </Select>
             </FormControl>
           </Grid>

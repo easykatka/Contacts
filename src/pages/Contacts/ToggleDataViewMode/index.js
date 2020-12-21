@@ -3,24 +3,24 @@ import ViewModuleIcon from "@material-ui/icons/ViewModule";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import { DATA_VIEW_MODE } from "../../../constants";
-import PropTypes from "prop-types";
-import { useCallback } from "react";
+import { useEffect } from "react";
+import store from '../../../store'
+import { observer } from "mobx-react-lite";
 
-export const ToggleDataViewMode = ({ dataViewMode, setdataViewMode }) => {
+export const ToggleDataViewMode = observer( () => {
+	
   //body
-  const handleChangeViewMode = useCallback(
-    (_, nextView) => { if (nextView)  
-      setdataViewMode(nextView) 
-    },
-    [setdataViewMode]
-  );
-  //return
+  useEffect(() => {
+	localStorage.setItem('dataViewMode',store.dataViewMode) 
+}, [store.dataViewMode]);
+
   return (
     <ToggleButtonGroup size='small'
       orientation="horizontal"
-	  value={dataViewMode}
+	  value={store.dataViewMode}
 	  exclusive
-      onChange={handleChangeViewMode}
+      onChange={  (_, nextView) => {if (nextView) 
+		store.dataViewMode = nextView}}
     >
 			  <ToggleButton
         value={DATA_VIEW_MODE.TABLE}
@@ -29,7 +29,6 @@ export const ToggleDataViewMode = ({ dataViewMode, setdataViewMode }) => {
         <ViewListIcon />
       </ToggleButton>
       <ToggleButton
-       
 		value={DATA_VIEW_MODE.GRID}
         aria-label={DATA_VIEW_MODE.GRID}
       >
@@ -38,9 +37,5 @@ export const ToggleDataViewMode = ({ dataViewMode, setdataViewMode }) => {
 
     </ToggleButtonGroup>
   );
-};
-//proptypes
-ToggleDataViewMode.propTypes = {
-  dataViewMode: PropTypes.oneOf([DATA_VIEW_MODE.TABLE, DATA_VIEW_MODE.GRID]),
-  setdataViewMode: PropTypes.func.isRequired,
-};
+}
+)
