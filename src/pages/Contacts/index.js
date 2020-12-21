@@ -16,7 +16,9 @@ import { NATIONALITY_HUMAN_NAME } from "../../constants/nationality";
 import ContactsStore from "../../store/contactsStore";
 import { observer } from "mobx-react-lite";
 import SearchPanelStore from "../../store/searchPanelStore";
-import {ContactsCards} from "./ContactsCards";
+import { ContactsCards } from "./ContactsCards";
+import Pagination from '@material-ui/lab/Pagination';
+import {useState} from 'react'
 
 // styles
 const useStyles = makeStyles((theme) =>
@@ -41,25 +43,45 @@ export const Contacts = observer(() => {
     .filter((user) => filter.gender === "all" || user.gender === filter.gender)
     .filter((user) => {
       if (
-        (
-          user.name.first.toLowerCase() +
-          " " +
-          user.name.last.toLowerCase()
-        ).includes(filter.searchText.toLowerCase())
+        (user.name.first + " " + user.name.last)
+          .toLowerCase()
+          .includes(filter.searchText.toLowerCase())
       )
         return true;
+      return false;
     })
     .filter((user) => {
       if (
-        NATIONALITY_HUMAN_NAME[user.nat].toLowerCase().includes(
-          filter.nationality.toLowerCase())
-      )
+        NATIONALITY_HUMAN_NAME[user.nat]
+          .toLowerCase()
+          .includes(filter.nationality.toLowerCase())
+      ) 
         return true;
+      return false;
     });
 
   useEffect(() => {
     getContacts();
   }, [getContacts]);
+
+
+
+
+const [currentPage, setcurrentPage] = useState (1);
+  const pageSize = 8;
+  const pagesCount = Math.ceil(filteredUsers.length/pageSize)
+  const indexOfLastPage = currentPage * pageSize
+  const indexOfFistPage = indexOfLastPage - pageSize
+  const currentUsers = filteredUsers.slice(indexOfFistPage,indexOfLastPage)
+  const handleChange = (event, value) => {
+    setcurrentPage(value);
+  };
+
+  useEffect(()=> {
+	setcurrentPage(1)
+},[filter.searchText,filter.gender,filter.nationality])
+console.log(currentPage)
+
 
   //return
   return (
@@ -91,6 +113,7 @@ export const Contacts = observer(() => {
             <SearchPanel />
           </Box>
         </Grid>
+		<Pagination onChange={handleChange} count={pagesCount} />
         <Grid item xs={12}>
           {(() => {
             if (isLoading) {
@@ -100,14 +123,15 @@ export const Contacts = observer(() => {
               return <div>Error</div>;
             }
             if (dataViewMode === DATA_VIEW_MODE.TABLE) {
-              return <ContactsTable data={filteredUsers} />;
+              return <ContactsTable data={currentUsers} />;
             }
             if (dataViewMode === DATA_VIEW_MODE.GRID) {
-              return <ContactsCards data={filteredUsers}/>
+              return <ContactsCards data={currentUsers} />;
             }
             return "error";
           })()}
         </Grid>
+	
       </Grid>
     </Container>
   );

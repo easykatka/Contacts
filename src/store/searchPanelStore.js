@@ -4,7 +4,7 @@ import {GENDER} from "../constants/gender"
 class SearchPanelStore {
   filter = {
   searchText : "",
-  gender : "all",
+  gender : GENDER.ALL ,
   nationality : ""}
   constructor() {
     makeAutoObservable(this);

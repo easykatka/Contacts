@@ -10,7 +10,7 @@ class ContactsStore {
   getContacts = async () => {
     try {
       this.isLoading = true;
-      const response = await fetch("https://randomuser.me/api/?results=20");
+      const response = await fetch("https://randomuser.me/api/?results=400");
       const { results, error } = await response.json();
       if (error) {
         throw new Error();
