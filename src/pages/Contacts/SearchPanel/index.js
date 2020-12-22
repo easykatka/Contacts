@@ -9,7 +9,7 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
-import Store from "../../../store";
+import store from "../../../store";
 import { observer } from "mobx-react-lite";
 import { GENDER } from "../../../constants";
 
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 //body
 export const SearchPanel = observer(() => {
   const classes = useStyles();
-  const { filter } = Store;
+  const { filter } = store;
   return (
     <Grid container className={classes.root}>
       <Paper  className={classes.paper}>
@@ -44,12 +44,9 @@ export const SearchPanel = observer(() => {
               onChange={(e) => (filter.searchText = e.target.value)}
               className={classes.input_item}
               placeholder="Search by full name"
-              endAdornment={
-                <InputAdornment>
-                  <SearchIcon />
-                </InputAdornment>
-              }
-            />
+              endAdornment={<InputAdornment>
+                			  <SearchIcon />
+                			</InputAdornment>}/>
           </Grid>
           {/* выбор пола */}
           <Grid item xs={12} sm={12} md={6} xl={4} >
@@ -58,7 +55,7 @@ export const SearchPanel = observer(() => {
               <Select className={classes.input_item}
                 id="gender"
                 label="gender"
-                value={filter.gender}
+				value={filter.gender}
                 onChange={(e) => (filter.gender = e.target.value)}
               >
                 <MenuItem  value={GENDER.ALL}>All</MenuItem>
@@ -80,12 +77,9 @@ export const SearchPanel = observer(() => {
           <Button
             size="small"
             className={classes.clear_btn}
-            onClick={() => (
-              (filter.searchText = ""),
-              (filter.gender = GENDER.ALL),
-              (filter.nationality = "")
-            )}
-          >
+			onClick={() => {filter.searchText = "" 
+							filter.gender = GENDER.ALL
+              				filter.nationality = ""}}>
             Clear
           </Button>
           {/* закрывающие теги */}

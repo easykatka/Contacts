@@ -7,15 +7,14 @@ import Pagination from '@material-ui/lab/Pagination';
 import { ContactsTable } from "./ContactsTable";
 import { DATA_VIEW_MODE } from "../../constants";
 import { SearchPanel } from "./SearchPanel";
-import { useEffect } from "react";
-import { NATIONALITY_HUMAN_NAME } from "../../constants";
+
 import store from "../../store";
 import { observer } from "mobx-react-lite";
 import { ContactsCards } from "./ContactsCards";
 import {Header} from './Header'
+import {useFilter} from './useContacts'
 // styles
-const useStyles = makeStyles((theme) =>
-  createStyles({
+const useStyles = makeStyles((theme) => createStyles({
     root: {"&>*" : { justifyContent:'center' }},
     headContainer: {
       marginTop: theme.spacing(2),
@@ -25,34 +24,9 @@ const useStyles = makeStyles((theme) =>
 //body
 export const Contacts = observer(() => {
   const classes = useStyles();
-  const { getContacts, users, isLoading, isError ,filter , dataViewMode , currentPage } = store;
-  const filteredUsers = users
-    .filter((user) => filter.gender === "all" || user.gender === filter.gender)
-    .filter((user) => { if ((user.name.first + " " + user.name.last).toLowerCase().includes(filter.searchText.toLowerCase())) return true;
-      return false;})
-    .filter((user) => { if (NATIONALITY_HUMAN_NAME[user.nat].toLowerCase().includes(filter.nationality.toLowerCase())) return true;
-      return false;
-    });
-  useEffect(() => {
-    getContacts();
-  }, [getContacts]);
-
-  const pageSize = 8;
-  const pagesCount = Math.ceil(filteredUsers.length/pageSize)
-  const indexOfLastPage = currentPage * pageSize
-  const indexOfFistPage = indexOfLastPage - pageSize
-  const currentUsers = filteredUsers.slice(indexOfFistPage,indexOfLastPage)
-  const handleChange = (event, value) => {
-    store.currentPage = value;
-  };
-
-  useEffect(()=> {
-	store.currentPage = 1
-},[filter.searchText,filter.gender,filter.nationality])
-console.log(currentPage)
-
-
-  //return
+  const {isLoading, isError , dataViewMode , currentPage } = store;
+  const [currentUsers,pagesCount,handleChange] = useFilter ()
+//render
   return (
     <Container className={classes.root}>
       <Grid container>
@@ -66,7 +40,7 @@ console.log(currentPage)
         <Grid item xs={12}>
           {(() => {
             if (isLoading) { return <LinearProgress />;}
-            if (isError) { return <div> Fetch Error</div>;}
+            if (isError) { return <div> Fetch Error </div>  ;}
             if (dataViewMode === DATA_VIEW_MODE.TABLE) { return <ContactsTable data={currentUsers} />;}
             if (dataViewMode === DATA_VIEW_MODE.GRID) { return <ContactsCards data={currentUsers} />;}
             return "error";
