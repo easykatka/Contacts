@@ -1,18 +1,20 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import CardContent from "@material-ui/core/CardContent";
+import Card from "@material-ui/core/Card";
+import Grid from "@material-ui/core/Grid";
+
 import format from "date-fns/format";
 import parseISO from "date-fns/parseISO";
 import { CopyToClipboardtext } from "../../../components/CopyToClipboardText";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
+
 import {NATIONALITY_HUMAN_COLOR, NATIONALITY_HUMAN_NAME,} from "../../../constants";
-import Button from "@material-ui/core/Button";
+
 import store from '../../../store'
 
 const useStyles = makeStyles((theme) => ({
   card: {
-
     whiteSpace: "pre-line",
     minHeight: theme.spacing(20),
     textAlign: "center",
@@ -27,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 export const ContactsCards = ({ data }) => {
   const classes = useStyles();
-
   return (
+
     <Grid container className={classes.card}>
       {data.map((item) => (
         <Grid item xs={12} lg={3} sm={6} key={item.login.uuid}>

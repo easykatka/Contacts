@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 export const useFilter = () => {
 
-const {users ,filter , currentPage} = store
+const {users ,filter , currentPage } = store
 // фильтр по полу,национальности,имени
 const filteredUsers = users
   .filter((user) => filter.gender === "all" || user.gender === filter.gender)
@@ -22,7 +22,7 @@ const indexOfFistPage = indexOfLastPage - pageSize
 const currentUsers = filteredUsers.slice(indexOfFistPage,indexOfLastPage)
 //сброс на первую страницу,если изменился фильтр
 useEffect(()=> {
-	store.currentPage = 1
+	store.setCurrentPage(1)
 },[filter.searchText,filter.gender,filter.nationality])
 // фетч при первом рендере
 useEffect(() => {
@@ -30,7 +30,7 @@ useEffect(() => {
   }, []);
 // хендер изменения номера страницы
   const handleChange = (_, value) => {
-	store.currentPage = value;
+	store.setCurrentPage(value)
   };
 
 return [currentUsers,pagesCount,handleChange]

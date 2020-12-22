@@ -1,8 +1,5 @@
-import { makeAutoObservable } from "mobx";
+import { runInAction, makeAutoObservable } from "mobx";
 import { GENDER, DATA_VIEW_MODE } from "../constants";
-const getInitialDataViewMode = () => {
-  return localStorage.getItem("dataViewMode") || DATA_VIEW_MODE.TABLE;
-};
 
 class Store {
   //users
@@ -16,33 +13,34 @@ class Store {
     nationality: "",
   };
   //dataviewmode
-  dataViewMode = getInitialDataViewMode();
+  dataViewMode = localStorage.getItem("dataViewMode") || DATA_VIEW_MODE.TABLE;
   //currentpage
   currentPage = 1;
-
   constructor() {
     makeAutoObservable(this);
   }
   getContacts = async () => {
     try {
       this.isLoading = true;
-      const response = await fetch("https://randomuser.me/api/?results=400"  );
+      const response = await fetch("https://randomuser.me/api/?results=50");
       const { results, error } = await response.json();
       if (error) {
+        console.log(error);
         throw new Error();
       }
-      this.users = results;
-      this.isError = false;
+      runInAction(() => {
+        this.users = results;
+        this.isError = false;
+      });
     } catch (e) {
-      this.isError = true;
+      runInAction(() => (this.isError = true));
     } finally {
-      this.isLoading = false;
-    }
-  };
-  setDataViewMode(data) {
-    debugger;
-    this.filter.dataViewMode = data;
-  }
+	  runInAction(() => (this.isLoading = false))}}
+	  
+	setCurrentPage(page) {this.currentPage = page};
+	setSearchText(text) {this.filter.searchText = text};
+	setGender(gender) {this.filter.gender = gender}
+	setNat(nat) {this.filter.nationality = nat}
 }
 
 export default new Store();

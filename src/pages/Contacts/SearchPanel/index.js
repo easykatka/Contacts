@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
 }));
+
 //body
 export const SearchPanel = observer(() => {
   const classes = useStyles();
@@ -41,7 +42,7 @@ export const SearchPanel = observer(() => {
             <OutlinedInput
               size="small"
               value={filter.searchText}
-              onChange={(e) => (filter.searchText = e.target.value)}
+              onChange={e => store.setSearchText(e.target.value)}
               className={classes.input_item}
               placeholder="Search by full name"
               endAdornment={<InputAdornment>
@@ -56,7 +57,7 @@ export const SearchPanel = observer(() => {
                 id="gender"
                 label="gender"
 				value={filter.gender}
-                onChange={(e) => (filter.gender = e.target.value)}
+                onChange={e => store.setGender(e.target.value)}
               >
                 <MenuItem  value={GENDER.ALL}>All</MenuItem>
                 <MenuItem  value={GENDER.MALE}>Male</MenuItem>
@@ -68,7 +69,7 @@ export const SearchPanel = observer(() => {
           <Grid item xs={12} sm={12} md={6} xl={4}>
             <OutlinedInput
               value={filter.nationality}
-              onChange={(e) => (filter.nationality = e.target.value)}
+              onChange={e => store.setNat(e.target.value)}
               className={classes.input_item}
               placeholder="Nationality"
             />
@@ -77,9 +78,9 @@ export const SearchPanel = observer(() => {
           <Button
             size="small"
             className={classes.clear_btn}
-			onClick={() => {filter.searchText = "" 
-							filter.gender = GENDER.ALL
-              				filter.nationality = ""}}>
+			onClick={() => {store.setSearchText("");
+							store.setGender(GENDER.ALL);
+							store.setNat("")}}>
             Clear
           </Button>
           {/* закрывающие теги */}

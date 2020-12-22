@@ -22,10 +22,14 @@ const useStyles = makeStyles((theme) => createStyles({
   })
 );
 //body
-export const Contacts = observer(() => {
+export const Contacts = observer(() => { 
+
+
   const classes = useStyles();
   const {isLoading, isError , dataViewMode , currentPage } = store;
   const [currentUsers,pagesCount,handleChange] = useFilter ()
+
+  
 //render
   return (
     <Container className={classes.root}>
@@ -38,7 +42,7 @@ export const Contacts = observer(() => {
         </Grid>
 		<Pagination  page={currentPage} onChange={handleChange} count={pagesCount} />
         <Grid item xs={12}>
-          {(() => {
+          {(() => { 
             if (isLoading) { return <LinearProgress />;}
             if (isError) { return <div> Fetch Error </div>  ;}
             if (dataViewMode === DATA_VIEW_MODE.TABLE) { return <ContactsTable data={currentUsers} />;}
