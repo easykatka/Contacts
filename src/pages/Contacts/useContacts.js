@@ -4,7 +4,6 @@ import store from "../../store";
 import { useEffect } from "react";
 
 export const useFilter = () => {
-
 const {users ,filter , currentPage } = store
 // фильтр по полу,национальности,имени
 const filteredUsers = users
@@ -24,10 +23,14 @@ const currentUsers = filteredUsers.slice(indexOfFistPage,indexOfLastPage)
 useEffect(()=> {
 	store.setCurrentPage(1)
 },[filter.searchText,filter.gender,filter.nationality])
+
+
+
 // фетч при первом рендере
 useEffect(() => {
 	store.getContacts();
   }, []);
+
 // хендер изменения номера страницы
   const handleChange = (_, value) => {
 	store.setCurrentPage(value)

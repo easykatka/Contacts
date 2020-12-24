@@ -1,21 +1,17 @@
 import { runInAction, makeAutoObservable } from "mobx";
 import { GENDER, DATA_VIEW_MODE } from "../constants";
-
 class Store {
-  //users
   users = [];
   isLoading = true;
   isError = false;
-  //filter
   filter = {
     searchText: "",
     gender: GENDER.ALL,
     nationality: "",
   };
-  //dataviewmode
   dataViewMode = localStorage.getItem("dataViewMode") || DATA_VIEW_MODE.TABLE;
-  //currentpage
   currentPage = 1;
+  
   constructor() {
     makeAutoObservable(this);
   }
@@ -41,6 +37,6 @@ class Store {
 	setSearchText(text) {this.filter.searchText = text};
 	setGender(gender) {this.filter.gender = gender}
 	setNat(nat) {this.filter.nationality = nat}
+	
 }
-
 export default new Store();

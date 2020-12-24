@@ -38,7 +38,7 @@ export const DATA_VIEW_MODE = {
 	  [NATIONALITY.FI]: "Finn",
 	  [NATIONALITY.FR]: "French",
 	  [NATIONALITY.GB]: "British",
-	  [NATIONALITY.IE]: "Irish ",
+	  [NATIONALITY.IE]: "Irish",
 	  [NATIONALITY.IR]: "Iranian",
 	  [NATIONALITY.NO]: "Norwegian",
 	  [NATIONALITY.NL]: "Netherlander",

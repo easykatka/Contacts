@@ -1,26 +1,18 @@
 import { makeStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
+import {MenuItem,InputLabel,FormControl,Select,OutlinedInput,InputAdornment,Button,Grid,Paper} from "@material-ui/core"
 import SearchIcon from "@material-ui/icons/Search";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import Select from "@material-ui/core/Select";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
 import store from "../../../store";
 import { observer } from "mobx-react-lite";
 import { GENDER } from "../../../constants";
 
 // styles
 const useStyles = makeStyles((theme) => ({
-  root: {
-    paddingBottom: theme.spacing(2),
+	searchBlock: {
+		marginTop:theme.spacing(1),
+    paddingBottom: theme.spacing(1),
   },
   input_item: { maxHeight:theme.spacing(5) ,minWidth: theme.spacing(40), width: "100%" },
   clear_btn: {
-    width: "100%",
     height: theme.spacing(5),
   },
   paper: {
@@ -34,8 +26,8 @@ export const SearchPanel = observer(() => {
   const classes = useStyles();
   const { filter } = store;
   return (
-    <Grid container className={classes.root}>
-      <Paper  className={classes.paper}>
+    <Grid container className={classes.searchBlock}>
+      <Paper variant='outlined' className={classes.paper}>
         <Grid container spacing={3}>
           {/* поиск по имени */}
           <Grid item xs={12} sm={12} md={6} xl={4}>
@@ -76,7 +68,8 @@ export const SearchPanel = observer(() => {
           </Grid>
           {/* кнопка очистки инпутов */}
           <Button
-            size="small"
+			size="small"
+			fullWidth
             className={classes.clear_btn}
 			onClick={() => {store.setSearchText("");
 							store.setGender(GENDER.ALL);

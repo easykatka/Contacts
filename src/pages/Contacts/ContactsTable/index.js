@@ -1,12 +1,15 @@
 import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import { Typography } from "@material-ui/core";
+import {
+  Table,
+  TableBody,
+  Button,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import format from "date-fns/format";
 import parseISO from "date-fns/parseISO";
 import { CopyToClipboardtext } from "../../../components/CopyToClipboardText";
@@ -14,12 +17,16 @@ import {
   NATIONALITY_HUMAN_NAME,
   NATIONALITY_HUMAN_COLOR,
 } from "../../../constants";
-import Button from "@material-ui/core/Button";
-import store from '../../../store'
+import store from "../../../store";
 
 const useStyles = makeStyles((theme) => ({
   table: {},
-  row: { "&>*:not(img)": { padding: theme.spacing(1/2) , marginLeft:theme.spacing(1) } },
+  row: {
+    "&>*:not(img)": {
+      padding: theme.spacing(1 / 2),
+      marginLeft: theme.spacing(1),
+    },
+  },
   small: {
     width: theme.spacing(5),
     height: theme.spacing(5),
@@ -34,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ContactsTable = ({ data }) => {
+  console.log(data);
   const classes = useStyles();
   return (
     <TableContainer component={Paper}>
