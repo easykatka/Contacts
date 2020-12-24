@@ -12,18 +12,21 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  statistic: {
-	padding: theme.spacing(2),
-	
+  paper: {
+	padding: theme.spacing(3),
+
   },
   predominate: {
-    fontWeight:500,
+    fontWeight: 500,
     backgroundColor: "yellow",
-    marginLeft: theme.spacing(18),
+    marginLeft: theme.spacing(19),
   },
-  table: { "& > *": { borderBottom: "none" } },
+  grey:{"&>*": {color: "grey" ,borderBottom:'none',  }},
+  natCollection:{
+	justifyContent:'center',
+	"& >*": {whiteSpace: "pre" , "&>*":{justifyContent:'center'} }
+  }
 }));
-
 export const Statistic = () => {
   const [
     { males, females, collectionSize, indeterminate, natCollection },
@@ -31,14 +34,14 @@ export const Statistic = () => {
   const classes = useStyles();
 
   return (
-    <Paper variant="outlined" className={classes.statistic}>
+    <Paper variant="outlined" className={classes.paper}>
       <Typography variant="h6">Statistic</Typography>
       <Grid container>
-        <Grid item xs={4}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell> Collection Size</TableCell>
+        <Grid item xs={5}>
+          <Table >
+            <TableHead >
+              <TableRow className={classes.grey}>
+                <TableCell > Collection Size</TableCell>
                 <TableCell> Male</TableCell>
                 <TableCell> Females</TableCell>
                 <TableCell> Indeterminate</TableCell>
@@ -53,10 +56,7 @@ export const Statistic = () => {
               </TableRow>
             </TableBody>
           </Table>
-          <Typography noWrap
-            display="inline"
-            className={classes.predominate}
-          >
+          <Typography noWrap display="inline" className={classes.predominate}>
             {males == females
               ? "Nobody predominate"
               : males > females
@@ -64,19 +64,23 @@ export const Statistic = () => {
               : "Women predominate"}
           </Typography>
         </Grid>
-
-        <Grid container>
+        <Grid container className={classes.natCollection}>
           <Grid item>
-            <Typography>Nationalities</Typography>
+            <Typography  style={{color : 'grey'}} >Nationalities</Typography>
           </Grid>
-		  <Grid container spacing={1}>
-          {Object.keys(natCollection).map((i) => (
-            <Grid item xs={6} sm={4} md={3} lg={2} >
-              {i} {natCollection[i]}
-			  
-            </Grid>
-          ))}
-		  </Grid>
+          <Grid container xs={12} >
+            {Object.keys(natCollection).sort().map((i) => (
+              <Grid  container xs={12} sm={6} md={4} lg={3}>
+                <span style={{	fontWeight:800}}>{i}</span>
+                <span>
+					{natCollection[i] === 1 ?
+					  `  ${natCollection[i]} contact` 
+					 :
+					  `  ${natCollection[i]} contacts` }	
+					</span>
+              </Grid>
+            ))}
+          </Grid>
         </Grid>
       </Grid>
     </Paper>

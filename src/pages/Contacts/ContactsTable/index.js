@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import {
+import {TableSortLabel,
   Table,
   TableBody,
   Button,
@@ -9,6 +9,7 @@ import {
   TableRow,
   Paper,
   Typography,
+  Avatar,
 } from "@material-ui/core";
 import format from "date-fns/format";
 import parseISO from "date-fns/parseISO";
@@ -28,17 +29,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   small: {
-    width: theme.spacing(5),
-    height: theme.spacing(5),
+   
     borderRadius: "50%",
   },
   name: {
     color: "dodgerBlue",
   },
-  nat: {
-    cursor: "pointer",
-  },
-}));
+  nat: {textTransform:'none',
+  fontSize:11 ,
+  minWidth:theme.spacing(10)
+  }
+}))
 
 export const ContactsTable = ({ data }) => {
   console.log(data);
@@ -49,7 +50,7 @@ export const ContactsTable = ({ data }) => {
         <TableHead>
           <TableRow>
             <TableCell>Avatar</TableCell>
-            <TableCell>Full name</TableCell>
+			<TableCell> <TableSortLabel>Full name</TableSortLabel></TableCell>
             <TableCell>Birthday</TableCell>
             <TableCell>Email</TableCell>
             <TableCell>Phone</TableCell>
@@ -59,9 +60,9 @@ export const ContactsTable = ({ data }) => {
         </TableHead>
         <TableBody>
           {data.map((item) => (
-            <TableRow key={item.login.uuid} className={classes.row}>
+            <TableRow hover='true' size="small" key={item.login.uuid} className={classes.row}>
               <TableCell>
-                <img
+                <Avatar
                   className={classes.small}
                   alt=""
                   src={item.picture.thumbnail}
@@ -91,15 +92,18 @@ export const ContactsTable = ({ data }) => {
 			   ${item.location.street.name} ${item.location.street.number}`}
                 />
               </TableCell>
-              <TableCell align="right" className={classes.nat}>
-                <Button
+              <TableCell  align="right" >
+				<Button style={{wordWrap:"break-word"}}
+				variant='outlined'
+					 style={{ borderColor:NATIONALITY_HUMAN_COLOR[item.nat], color: NATIONALITY_HUMAN_COLOR[item.nat] }}
                   onClick={() =>
                     (store.filter.nationality =
                       NATIONALITY_HUMAN_NAME[item.nat])
                   }
-                  style={{ backgroundColor: NATIONALITY_HUMAN_COLOR[item.nat] }}
-                >
+                  className={classes.nat}
+                ><span  className={classes.nat}>
                   {NATIONALITY_HUMAN_NAME[item.nat]}
+				  </span>
                 </Button>
               </TableCell>
             </TableRow>

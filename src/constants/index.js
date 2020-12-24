@@ -48,22 +48,22 @@ export const DATA_VIEW_MODE = {
   
   }
   export const NATIONALITY_HUMAN_COLOR = {
-	  [NATIONALITY.AU]: "red",
-	  [NATIONALITY.BR]: "pink",
-	  [NATIONALITY.CA]: "mediumpurple",
-	  [NATIONALITY.CH]: "cyan",
-	  [NATIONALITY.DE]: "yellow",
-	  [NATIONALITY.DK]: "mistyrose",
-	  [NATIONALITY.ES]: "magenta",
-	  [NATIONALITY.FI]: "orange",
-	  [NATIONALITY.FR]: "olive",
-	  [NATIONALITY.GB]: "teal",
-	  [NATIONALITY.IE]: "violet",
-	  [NATIONALITY.IR]: "plum",
-	  [NATIONALITY.NO]: "peru",
-	  [NATIONALITY.NL]: "cadetblue",
-	  [NATIONALITY.NZ]: "brown",
-	  [NATIONALITY.TR]: "silver",
-	  [NATIONALITY.US]: "goldenrod"
+	  [NATIONALITY.AU]: "#9F1B69",
+	  [NATIONALITY.BR]: "#E864B2",
+	  [NATIONALITY.CA]: "#4461EC",
+	  [NATIONALITY.CH]: "#51C453",
+	  [NATIONALITY.DE]: "#33C5C9",
+	  [NATIONALITY.DK]: "#F98C39",
+	  [NATIONALITY.ES]: "#FA7F56",
+	  [NATIONALITY.FI]: "#2B94FF",
+	  [NATIONALITY.FR]: "#9F1B69",
+	  [NATIONALITY.GB]: "#E864B2",
+	  [NATIONALITY.IE]: "#4461EC",
+	  [NATIONALITY.IR]: "#51C453",
+	  [NATIONALITY.NO]: "#33C5C9",
+	  [NATIONALITY.NL]: "#F98C39",
+	  [NATIONALITY.NZ]: "#FA7F56",
+	  [NATIONALITY.TR]: "#2B94FF",
+	  [NATIONALITY.US]: "#9F1B69"
   
   }

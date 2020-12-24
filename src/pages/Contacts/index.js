@@ -36,7 +36,7 @@ export const Contacts = observer(() => {
             <SearchPanel />
         </Grid>
 		<Pagination  page={currentPage} onChange={handleChange} count={pagesCount} />
-        <Grid item xs={12} className={classes.content}>
+        <Grid item xs={12}  className={classes.content}>
           {(() => { 
             if (isLoading) { return <LinearProgress />;}
             if (isError) { return <div> Fetch Error </div>  ;}
@@ -45,7 +45,7 @@ export const Contacts = observer(() => {
             return "error";
           })()}
 		  </Grid>
-		  <Grid item xs={12}>
+		  <Grid >
 			  <Statistic/>
 		  </Grid>
         </Grid>

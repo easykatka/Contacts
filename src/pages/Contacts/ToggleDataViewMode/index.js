@@ -12,7 +12,7 @@ export const ToggleDataViewMode = observer( () => {
   //body
   useEffect(() => {
 	localStorage.setItem('dataViewMode',store.dataViewMode) 
-}, []);
+}, [store.dataViewMode]);
 
   return (
     <ToggleButtonGroup size='small'
