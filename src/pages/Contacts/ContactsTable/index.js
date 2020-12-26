@@ -61,7 +61,7 @@ export const ContactsTable = ({ data }) => {
         </TableHead>
         <TableBody>
           {data.map((item) => (
-            <TableRow hover='true' size="small" key={item.login.uuid} className={classes.row}>
+            <TableRow hover={true} size="small" key={item.login.uuid} className={classes.row}>
               <TableCell>
                 <Avatar
                   className={classes.small}

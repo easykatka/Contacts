@@ -68,9 +68,9 @@ export const Statistic = () => {
           <Grid>
             <Typography  style={{color : 'grey'}} >Nationalities</Typography>
           </Grid>
-          <Grid container xs={12} >
+          <Grid container>
             {Object.keys(natCollection).sort().map((i) => (
-              <Grid  key={i} container xs={12} sm={6} md={4} lg={3}>
+              <Grid  key={i} item xs={12} sm={6} md={4} lg={3}>
                 <span style={{	fontWeight:800}}>{i}</span>
                 <span>
 					{natCollection[i] === 1 ?
