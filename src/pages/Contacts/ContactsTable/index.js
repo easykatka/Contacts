@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const ContactsTable = ({ data }) => {
   console.log(data);
+  
   const classes = useStyles();
   return (
     <TableContainer component={Paper}>

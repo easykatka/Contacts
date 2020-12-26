@@ -4,13 +4,17 @@ class Store {
   users = [];
   isLoading = true;
   isError = false;
+  //фильтры
   filter = {
     searchText: "",
     gender: GENDER.ALL,
     nationality: "",
   };
+  //датавью
   dataViewMode = localStorage.getItem("dataViewMode") || DATA_VIEW_MODE.TABLE;
   currentPage = 1;
+  //сортировка
+  sortType = "asc"
   
   constructor() {
     makeAutoObservable(this);

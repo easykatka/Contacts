@@ -58,19 +58,19 @@ export const Statistic = () => {
           </Table>
           <Typography noWrap display="inline" className={classes.predominate}>
             {males == females
-              ? "Nobody predominate"
+              ? null
               : males > females
               ? "Men predominate"
               : "Women predominate"}
           </Typography>
         </Grid>
         <Grid container className={classes.natCollection}>
-          <Grid item>
+          <Grid>
             <Typography  style={{color : 'grey'}} >Nationalities</Typography>
           </Grid>
           <Grid container xs={12} >
             {Object.keys(natCollection).sort().map((i) => (
-              <Grid  container xs={12} sm={6} md={4} lg={3}>
+              <Grid  key={i} container xs={12} sm={6} md={4} lg={3}>
                 <span style={{	fontWeight:800}}>{i}</span>
                 <span>
 					{natCollection[i] === 1 ?

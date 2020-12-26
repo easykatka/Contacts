@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) =>
       marginRight: theme.spacing(1),
 	},
 	black:{
-	color:'black'}
+	color:'black',
+	fontWeight:400}
   })
 );
 const STATUS_COPY = {

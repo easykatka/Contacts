@@ -32,11 +32,10 @@ export const SearchPanel = observer(() => {
           {/* поиск по имени */}
           <Grid item xs={12} sm={12} md={6} xl={4}>
             <OutlinedInput
-              size="small"
-              value={filter.searchText}
+			  value={filter.searchText}
               onChange={e => store.setSearchText(e.target.value)}
               className={classes.input_item}
-              placeholder="Search by full name"
+              placeholder="Search by name"
               endAdornment={<InputAdornment>
                 			  <SearchIcon />
                 			</InputAdornment>}/>
@@ -63,12 +62,11 @@ export const SearchPanel = observer(() => {
               value={filter.nationality}
               onChange={e => store.setNat(e.target.value)}
               className={classes.input_item}
-              placeholder="Nationality"
+              placeholder="Search by nationality"
             />
           </Grid>
           {/* кнопка очистки инпутов */}
           <Button
-			size="small"
 			fullWidth
             className={classes.clear_btn}
 			onClick={() => {store.setSearchText("");
