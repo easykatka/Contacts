@@ -42,11 +42,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export const ContactsTable = ({ data }) => {
-  console.log(data);
-  
   const classes = useStyles();
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} data-testid="contacts-table-container">
       <Table className={classes.table} aria-label="contacts table">
         <TableHead>
           <TableRow>
@@ -94,7 +92,7 @@ export const ContactsTable = ({ data }) => {
                 />
               </TableCell>
               <TableCell  align="right" >
-				<Button style={{wordWrap:"break-word"}}
+				<Button 
 				variant='outlined'
 					 style={{ borderColor:NATIONALITY_HUMAN_COLOR[item.nat], color: NATIONALITY_HUMAN_COLOR[item.nat] }}
                   onClick={() =>

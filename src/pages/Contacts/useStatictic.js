@@ -30,7 +30,5 @@ const getStatictic = store.users.reduce(
     },
   )
 
-
-
 return [getStatictic]
 }

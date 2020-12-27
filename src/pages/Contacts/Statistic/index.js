@@ -57,7 +57,7 @@ export const Statistic = () => {
             </TableBody>
           </Table>
           <Typography noWrap display="inline" className={classes.predominate}>
-            {males == females
+            {males === females
               ? null
               : males > females
               ? "Men predominate"

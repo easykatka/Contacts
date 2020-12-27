@@ -15,12 +15,13 @@ const filteredUsers = users
 })
 const sortFunc  = () =>	  {
 	switch (sortType) {
-		case "default":
-			return filteredUsers;
+		
+			
 			case "asc":
 			return [...filteredUsers].sort((a, b) => a.name.first.localeCompare(b.name.first));
 			case "desc":
 			return [...filteredUsers].sort((a, b) => b.name.first.localeCompare(a.name.first));
+			default : return filteredUsers
 			
 	}}
 	const sortedUsers = sortFunc()
@@ -39,6 +40,10 @@ useEffect(()=> {
 useEffect(() => {
 	store.getContacts();
   }, []);
+  // сетить в локал сторадж
+  useEffect(() => {
+	localStorage.setItem('dataViewMode',store.dataViewMode) 
+});
 // хендер изменения номера страницы
   const handleChange = (_, value) => {
 	store.setCurrentPage(value)

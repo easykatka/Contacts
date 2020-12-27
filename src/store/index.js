@@ -6,15 +6,15 @@ class Store {
   isError = false;
   //фильтры
   filter = {
-    searchText: "",
+    searchText:"" ,
     gender: GENDER.ALL,
-    nationality: "",
+    nationality:"" ,
   };
   //датавью
   dataViewMode = localStorage.getItem("dataViewMode") || DATA_VIEW_MODE.TABLE;
   currentPage = 1;
   //сортировка
-  sortType = "asc"
+  sortType = "default"
   
   constructor() {
     makeAutoObservable(this);
@@ -25,7 +25,6 @@ class Store {
       const response = await fetch("https://randomuser.me/api/?results=50");
       const { results, error } = await response.json();
       if (error) {
-        console.log(error);
         throw new Error();
       }
       runInAction(() => {
