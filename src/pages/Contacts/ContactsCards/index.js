@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 export const ContactsCards = ({ data }) => {
   const classes = useStyles();
   return (
-    <Grid container className={classes.card}>
+    <Grid container className={classes.card} data-testid="contacts-grid-container">
       {data.map((item) => (
         <Grid item xs={12} lg={3} sm={6} key={item.login.uuid}>
           <Card variant="outlined">

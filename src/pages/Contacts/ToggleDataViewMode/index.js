@@ -16,18 +16,18 @@ export const ToggleDataViewMode = observer( () => {
       orientation="horizontal"
 	  value={store.dataViewMode}
 	  exclusive
-      onChange={  (_, nextView) => {if (nextView) 
-		store.dataViewMode = nextView}}
-    >
+      onChange={  (_, nextView) => {if (nextView) {store.setViewMode(nextView)}}} >
 			  <ToggleButton
         value={DATA_VIEW_MODE.TABLE}
 		aria-label={DATA_VIEW_MODE.TABLE}
+		data-testid={"toggle-data-view-mode-table"}
       >
         <ViewListIcon />
       </ToggleButton>
       <ToggleButton
 		value={DATA_VIEW_MODE.GRID}
-        aria-label={DATA_VIEW_MODE.GRID}
+		aria-label={DATA_VIEW_MODE.GRID}
+		data-testid={"toggle-data-view-mode-grid"}
       >
         <ViewModuleIcon />
       </ToggleButton>

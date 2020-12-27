@@ -40,6 +40,7 @@ class Store {
 	setSearchText(text) {this.filter.searchText = text};
 	setGender(gender) {this.filter.gender = gender}
 	setNat(nat) {this.filter.nationality = nat}
+	setViewMode(mode) {this.dataViewMode = mode}
 	
 }
 export default new Store();
