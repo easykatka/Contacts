@@ -43,19 +43,16 @@ export const Contacts = observer(() => {
         />
         <Grid item xs={12} className={classes.content}>
           {isLoading ? (
-            <LinearProgress data-testid="contacts-loader"/>
+            <LinearProgress data-testid="contacts-loader" />
           ) : isError ? (
-            <div> Fetch Error </div>
+            <div data-testid="contacts-error"> Fetch Error </div>
           ) : dataViewMode === DATA_VIEW_MODE.TABLE ? (
             <ContactsTable data={currentUsers} />
           ) : (
             <ContactsCards data={currentUsers} />
           )}
-		  
         </Grid>
-       
-		{ isLoading===false ?  <Statistic/> : null}
-		
+        {isLoading === false ? <Statistic /> : null}
       </Grid>
     </Container>
   );
