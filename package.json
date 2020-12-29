@@ -1,6 +1,6 @@
 {
   "homepage": "http://easykatka.github.io/Contacts",
-  "name": "Contacts",
+  "name": "contacts",
   "version": "0.1.0",
   "private": true,
   "proxy": "https://randomuser.me",
@@ -52,8 +52,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "YOUR_COMMAND_HERE",
-      "pre-push": "YOUR_COMMAND_HERE"
+      "pre-commit": "--no-verify",
+      "pre-push": "--no-verify"
     }
   },
   "lint-staged": {

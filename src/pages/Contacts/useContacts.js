@@ -1,27 +1,42 @@
 
 import { NATIONALITY_HUMAN_NAME } from "../../constants";
 import store from "../../store";
-import { useEffect } from "react";
+import { useEffect ,useState  } from "react";
+import {useDebounce} from "./useDebounce"
 
-export const useFilter = () => {
+export const useFilter = () => { debugger
 const {users ,filter , currentPage ,sortType} = store
 // фильтр по полу,национальности,имени
-const filteredUsers = users
-  .filter((user) => filter.gender === "all" || user.gender === filter.gender)
-  .filter((user) => { if ((user.name.first + " " + user.name.last).toLowerCase().includes(filter.searchText.toLowerCase())) return true;
-	return false;})
-  .filter((user) => { if (NATIONALITY_HUMAN_NAME[user.nat].toLowerCase().includes(filter.nationality.toLowerCase())) return true;
-	return false;
-})
+const debouncedText = useDebounce(filter.searchText, 500);
+const debouncedNationality = useDebounce(filter.nationality,500)
+
+const [result, setResult] = useState([]);
+
+
+useEffect(() => {
+		setResult (users
+			.filter((user) => filter.gender === "all" || user.gender === filter.gender)
+			.filter((user) => { if ((user.name.first + " " + user.name.last).toLowerCase().includes(debouncedText)) return true;
+			  return false;})
+			.filter((user) => { if (NATIONALITY_HUMAN_NAME[user.nat].toLowerCase().includes(debouncedNationality)) return true;
+			  return false;
+		  }))
+}, [debouncedText,debouncedNationality,filter.gender])
+
+
+useEffect(() => {
+	setResult(users)
+},[users])
+
 const sortFunc  = () =>	  {
 	switch (sortType) {
 		
 			
 			case "asc":
-			return [...filteredUsers].sort((a, b) => a.name.first.localeCompare(b.name.first));
+			return [...result].sort((a, b) => a.name.first.localeCompare(b.name.first));
 			case "desc":
-			return [...filteredUsers].sort((a, b) => b.name.first.localeCompare(a.name.first));
-			default : return filteredUsers
+			return [...result].sort((a, b) => b.name.first.localeCompare(a.name.first));
+			default : return result
 			
 	}}
 	const sortedUsers = sortFunc()
