@@ -49,7 +49,8 @@ export const ContactsCards = ({ data }) => {
               <Button
                 className={classes.nat}
                 onClick={() =>
-                  (store.filter.nationality = NATIONALITY_HUMAN_NAME[item.nat])
+                  (store.setNat(
+					NATIONALITY_HUMAN_NAME[item.nat]))
                 }
                 style={{
                   borderColor: NATIONALITY_HUMAN_COLOR[item.nat],

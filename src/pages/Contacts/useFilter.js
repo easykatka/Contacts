@@ -37,13 +37,13 @@ export const useFilter = () => {
           return false;
         })
     );
-  }, [debouncedText, debouncedNationality, filter.gender]);
+  }, [debouncedText, debouncedNationality, filter.gender , users]);
   //
   useEffect(() => {
     setResult(users);
   }, [users]);
 
-  // TODO добить сортировку по имени
+
   const sortFunc = () => {
     switch (orderBy.order) {
       case "asc":
@@ -58,7 +58,7 @@ export const useFilter = () => {
         return result;
     }
   };
-  const orderHandler = () => {debugger
+  const orderHandler = () => {
 	  orderBy.order==="" ? store.setOrderBy("asc" , false):
 	  orderBy.order==="asc" ? store.setOrderBy('desc' , false): store.setOrderBy('' , true)
 		

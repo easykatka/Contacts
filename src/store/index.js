@@ -6,24 +6,24 @@ class Store {
   isError = false;
   //фильтры
   filter = {
-    searchText:"" ,
+    searchText: "",
     gender: GENDER.ALL,
-    nationality:"" ,
+    nationality: "",
   };
   //датавью
   dataViewMode = localStorage.getItem("dataViewMode") || DATA_VIEW_MODE.TABLE;
   currentPage = 1;
   //сортировка по имени
   orderBy = {
-	  order:"",
-	  hideSortIcon: "false"
-  }
+    order: "",
+    hideSortIcon: false,
+  };
   constructor() {
     makeAutoObservable(this);
   }
   getContacts = async () => {
     try {
-      this.isLoading = true
+      this.isLoading = true;
       const response = await fetch("https://randomuser.me/api/?results=50");
       const { results, error } = await response.json();
       if (error) {
@@ -36,17 +36,28 @@ class Store {
     } catch (e) {
       runInAction(() => (this.isError = true));
     } finally {
-	  runInAction(() => (this.isLoading = false))}}
-	  
-	
-	setCurrentPage(page) {this.currentPage = page};
-	setSearchText(text) {this.filter.searchText = text};
-	setOrderBy(order,hideSortIcon) {
-		this.orderBy.order = order
-		this.orderBy.hideSortIcon=hideSortIcon
-	}
-	setGender(gender) {this.filter.gender = gender};
-	setNat(nat) {this.filter.nationality = nat};
-	setViewMode(mode) {this.dataViewMode = mode};
+      runInAction(() => (this.isLoading = false));
+    }
+  };
+
+  setCurrentPage(page) {
+    this.currentPage = page;
+  }
+  setSearchText(text) {
+    this.filter.searchText = text;
+  }
+  setOrderBy(order, hideSortIcon) {
+    this.orderBy.order = order;
+    this.orderBy.hideSortIcon = hideSortIcon;
+  }
+  setGender(gender) {
+    this.filter.gender = gender;
+  }
+  setNat(nat) {
+    this.filter.nationality = nat;
+  }
+  setViewMode(mode) {
+    this.dataViewMode = mode;
+  }
 }
 export default new Store();

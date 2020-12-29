@@ -55,8 +55,9 @@ export const ContactsTable = ({ data ,orderHandler}) => {
 			
 			 > <TableSortLabel
 			 onClick={orderHandler}
+		
 			 hideSortIcon={store.orderBy.hideSortIcon}
-			 direction={store.orderBy.order}
+			 direction={store.orderBy.order || "asc"}
 			>Full name</TableSortLabel></TableCell>
             <TableCell>Birthday</TableCell>
             <TableCell>Email</TableCell>
@@ -104,8 +105,8 @@ export const ContactsTable = ({ data ,orderHandler}) => {
 				variant='outlined'
 					 style={{ borderColor:NATIONALITY_HUMAN_COLOR[item.nat], color: NATIONALITY_HUMAN_COLOR[item.nat] }}
                   onClick={() =>
-                    (store.filter.nationality =
-                      NATIONALITY_HUMAN_NAME[item.nat])
+                    (store.setNat(
+                      NATIONALITY_HUMAN_NAME[item.nat]))
                   }
                   className={classes.nat}
                 ><span  className={classes.nat}>
