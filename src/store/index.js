@@ -13,9 +13,11 @@ class Store {
   //датавью
   dataViewMode = localStorage.getItem("dataViewMode") || DATA_VIEW_MODE.TABLE;
   currentPage = 1;
-  //сортировка
-  sortType = "default"
-  
+  //сортировка по имени
+  orderBy = {
+	  order:"",
+	  hideSortIcon: "false"
+  }
   constructor() {
     makeAutoObservable(this);
   }
@@ -36,11 +38,15 @@ class Store {
     } finally {
 	  runInAction(() => (this.isLoading = false))}}
 	  
+	
 	setCurrentPage(page) {this.currentPage = page};
 	setSearchText(text) {this.filter.searchText = text};
-	setGender(gender) {this.filter.gender = gender}
-	setNat(nat) {this.filter.nationality = nat}
-	setViewMode(mode) {this.dataViewMode = mode}
-	
+	setOrderBy(order,hideSortIcon) {
+		this.orderBy.order = order
+		this.orderBy.hideSortIcon=hideSortIcon
+	}
+	setGender(gender) {this.filter.gender = gender};
+	setNat(nat) {this.filter.nationality = nat};
+	setViewMode(mode) {this.dataViewMode = mode};
 }
 export default new Store();

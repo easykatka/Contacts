@@ -8,7 +8,7 @@ import store from "../../store";
 import { observer } from "mobx-react-lite";
 import { ContactsCards } from "./ContactsCards";
 import { Header } from "./Header";
-import { useFilter } from "./useContacts";
+import { useFilter } from "./useFilter";
 import { Statistic } from "./../Contacts/Statistic";
 // styles
 const useStyles = makeStyles((theme) =>
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) =>
 export const Contacts = observer(() => {
   const classes = useStyles();
   const { isLoading, isError, dataViewMode, currentPage } = store;
-  const [currentUsers, pagesCount, handleChange] = useFilter();
+  const [currentUsers, pagesCount, handleChange ,orderHandler] = useFilter();
 
   //render
   return (
@@ -47,7 +47,7 @@ export const Contacts = observer(() => {
           ) : isError ? (
             <div data-testid="contacts-error"> Fetch Error </div>
           ) : dataViewMode === DATA_VIEW_MODE.TABLE ? (
-            <ContactsTable data={currentUsers} />
+            <ContactsTable orderHandler={orderHandler} data={currentUsers} />
           ) : (
             <ContactsCards data={currentUsers} />
           )}

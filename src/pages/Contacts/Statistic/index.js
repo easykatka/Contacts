@@ -1,20 +1,9 @@
 import { useStatistic } from "../useStatictic";
-import {
-  Paper,
-  Grid,
-  TableHead,
-  Typography,
-  TableRow,
-  TableCell,
-  TableBody,
-  Table,
-} from "@material-ui/core";
+import {Paper,Grid,TableHead,Typography,TableRow,TableCell,TableBody,Table} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
 const useStyles = makeStyles((theme) => ({
   paper: {
 	padding: theme.spacing(3),
-
   },
   predominate: {
     fontWeight: 500,
@@ -34,7 +23,7 @@ export const Statistic = () => {
   const classes = useStyles();
 
   return (
-    <Paper variant="outlined" className={classes.paper}>
+    <Paper variant="outlined" data-testid='statictic-container' className={classes.paper}>
       <Typography variant="h6">Statistic</Typography>
       <Grid container>
         <Grid item xs={5}>

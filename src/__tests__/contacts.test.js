@@ -61,7 +61,7 @@ describe(`contacts data view mode`, () => {
       "Mui-selected"
     );
   });
-  
+
   test(`should equal grid`, async () => {
     render(<Contacts />);
     const loader = screen.getByTestId("contacts-loader");
@@ -77,9 +77,9 @@ describe(`contacts data view mode`, () => {
     ).not.toBeInTheDocument();
     expect(screen.getByTestId("toggle-data-view-mode-table")).not.toHaveClass(
       "Mui-selected"
-	);
-	expect(window.localStorage.getItem("dataViewMode")).toEqual("grid")
-	window.localStorage.clear()
+    );
+    expect(window.localStorage.getItem("dataViewMode")).toEqual("grid");
+    window.localStorage.clear();
   });
   test(`switch from grid to table`, async () => {
     render(<Contacts />);
@@ -98,9 +98,17 @@ describe(`contacts data view mode`, () => {
     ).not.toBeInTheDocument();
     expect(screen.getByTestId("toggle-data-view-mode-grid")).not.toHaveClass(
       "Mui-selected"
-	);
-	expect(window.localStorage.getItem("dataViewMode")).toEqual("table")
-	window.localStorage.clear()
+    );
+    expect(window.localStorage.getItem("dataViewMode")).toEqual("table");
+    window.localStorage.clear();
   });
-  
+});
+
+describe(`statistic block`, () => {
+  test(`statistic block should be visible after fetch`, async () => {
+	render(<Contacts />);
+    const loader = screen.getByTestId("contacts-loader");
+    await waitForElementToBeRemoved(loader);
+    expect(screen.getByTestId("statictic-container")).toBeInTheDocument()
+  });
 });

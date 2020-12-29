@@ -41,15 +41,23 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export const ContactsTable = ({ data }) => {
+export const ContactsTable = ({ data ,orderHandler}) => {
   const classes = useStyles();
+
+  
   return (
     <TableContainer component={Paper} data-testid="contacts-table-container">
       <Table className={classes.table} aria-label="contacts table">
         <TableHead>
           <TableRow>
             <TableCell>Avatar</TableCell>
-			<TableCell> <TableSortLabel>Full name</TableSortLabel></TableCell>
+			<TableCell
+			
+			 > <TableSortLabel
+			 onClick={orderHandler}
+			 hideSortIcon={store.orderBy.hideSortIcon}
+			 direction={store.orderBy.order}
+			>Full name</TableSortLabel></TableCell>
             <TableCell>Birthday</TableCell>
             <TableCell>Email</TableCell>
             <TableCell>Phone</TableCell>
