@@ -33,7 +33,11 @@ const useStyles = makeStyles((theme) => ({
 export const ContactsCards = ({ data }) => {
   const classes = useStyles();
   return (
-    <Grid container className={classes.card} data-testid="contacts-grid-container">
+    <Grid
+      container
+      className={classes.card}
+      data-testid="contacts-grid-container"
+    >
       {data.map((item) => (
         <Grid item xs={12} lg={3} sm={6} key={item.login.uuid}>
           <Card variant="outlined">
@@ -48,10 +52,7 @@ export const ContactsCards = ({ data }) => {
               </Typography>
               <Button
                 className={classes.nat}
-                onClick={() =>
-                  (store.setNat(
-					NATIONALITY_HUMAN_NAME[item.nat]))
-                }
+                onClick={() => store.setNat(NATIONALITY_HUMAN_NAME[item.nat])}
                 style={{
                   borderColor: NATIONALITY_HUMAN_COLOR[item.nat],
                   color: NATIONALITY_HUMAN_COLOR[item.nat],

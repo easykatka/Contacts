@@ -2,16 +2,19 @@ import store from '../../store'
 import { NATIONALITY_HUMAN_NAME } from "../../constants"
 export const useStatistic = () => {
  
-// получение числа людей в коллекции, разбивка по полу и нации
+
 const getStatictic = store.users.reduce(
     (acc, value) => {
-      acc.collectionSize += 1;
+		// количество людей в коллекции
+	  acc.collectionSize += 1;
+		// количество людей по полу
       if (value.gender === "male") {
         acc.males += 1;
       } else if (value.gender === "female") {
         acc.females += 1;
       } else {
-        acc.indeterminate += 1;
+		acc.indeterminate += 1;
+		// количество людей по нации
       }
       const fullNational = NATIONALITY_HUMAN_NAME[value.nat] || value.nat;
       if (!acc.natCollection[fullNational]) {

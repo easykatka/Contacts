@@ -13,6 +13,23 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 describe(`contacts get data`, () => {
+  test(`error`, async () => {
+    server.use(
+      rest.get("https://randomuser.me/api/?results=50", (req, res, ctx) => {
+        return res.once(
+          ctx.status(500),
+          ctx.json({
+            error: "Internal server error",
+          })
+        );
+      })
+    );
+    render(<Contacts />);
+    const loader = screen.getByTestId("contacts-loader");
+    await waitForElementToBeRemoved(loader);
+    expect(loader).not.toBeInTheDocument();
+    expect(screen.getByTestId("contacts-error")).toBeInTheDocument();
+  });
   test(`loading`, () => {
     render(<Contacts />);
     const loader = screen.getByTestId("contacts-loader");
@@ -25,23 +42,6 @@ describe(`contacts get data`, () => {
     await waitForElementToBeRemoved(loader);
     expect(loader).not.toBeInTheDocument();
     expect(screen.getByTestId("contacts-table-container")).toBeInTheDocument();
-  });
-  test(`error`, async () => {
-    server.use(
-      rest.get("https://randomuser.me/api/?results=50", (req, res, ctx) => {
-        return res(
-          ctx.status(500),
-          ctx.json({
-            error: "internal server error",
-          })
-        );
-      })
-    );
-    render(<Contacts />);
-    const loader = screen.getByTestId("contacts-loader");
-    await waitForElementToBeRemoved(loader);
-    expect(loader).not.toBeInTheDocument();
-    expect(screen.getByTestId("contacts-error")).toBeInTheDocument();
   });
 });
 
@@ -106,9 +106,9 @@ describe(`contacts data view mode`, () => {
 
 describe(`statistic block`, () => {
   test(`statistic block should be visible after fetch`, async () => {
-	render(<Contacts />);
+    render(<Contacts />);
     const loader = screen.getByTestId("contacts-loader");
     await waitForElementToBeRemoved(loader);
-    expect(screen.getByTestId("statictic-container")).toBeInTheDocument()
+    expect(screen.getByTestId("statictic-container")).toBeInTheDocument();
   });
 });

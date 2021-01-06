@@ -11,18 +11,17 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     headContainer: {
       marginTop: theme.spacing(2),
-	},
-	refresh_button: {
-		marginRight: theme.spacing(1),
-	  },
+    },
+    refresh_button: {
+      marginRight: theme.spacing(1),
+    },
   })
 );
 export const Header = () => {
-	const classes = useStyles();
+  const classes = useStyles();
   const { getContacts } = store;
   return (
-    <Grid item xs={12}
-      className={classes.headContainer} >
+    <Grid item xs={12} className={classes.headContainer}>
       <Box display="flex" justifyContent="space-between">
         <Typography variant="h5" component="h1">
           Contacts

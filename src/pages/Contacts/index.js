@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) =>
 export const Contacts = observer(() => {
   const classes = useStyles();
   const { isLoading, isError, dataViewMode, currentPage } = store;
-  const [currentUsers, pagesCount, handleChange ,orderHandler] = useFilter();
+  const [currentUsers, pagesCount, handleChange, orderHandler] = useFilter();
 
   //render
   return (
@@ -42,17 +42,20 @@ export const Contacts = observer(() => {
           count={pagesCount}
         />
         <Grid item xs={12} className={classes.content}>
-          {isLoading ? (
-            <LinearProgress data-testid="contacts-loader" />
-          ) : isError ? (
+          {isError ? (
             <div data-testid="contacts-error"> Fetch Error </div>
-          ) : dataViewMode === DATA_VIEW_MODE.TABLE ? (
+          ) : null}
+          {dataViewMode === DATA_VIEW_MODE.TABLE ? (
             <ContactsTable orderHandler={orderHandler} data={currentUsers} />
           ) : (
             <ContactsCards data={currentUsers} />
           )}
+          {isLoading ? (
+            <LinearProgress data-testid="contacts-loader" />
+          ) : (
+            <Statistic />
+          )}
         </Grid>
-        {isLoading === false ? <Statistic /> : null}
       </Grid>
     </Container>
   );

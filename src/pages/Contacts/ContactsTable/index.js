@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
-import {TableSortLabel,
+import {
+  TableSortLabel,
   Table,
   TableBody,
   Button,
@@ -29,36 +30,33 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   small: {
-   
     borderRadius: "50%",
   },
   name: {
     color: "dodgerBlue",
   },
-  nat: {textTransform:'none',
-  fontSize:11 ,
-  minWidth:theme.spacing(10)
-  }
-}))
+  nat: { textTransform: "none", fontSize: 11, minWidth: theme.spacing(10) },
+}));
 
-export const ContactsTable = ({ data ,orderHandler}) => {
+export const ContactsTable = ({ data, orderHandler }) => {
   const classes = useStyles();
 
-  
   return (
     <TableContainer component={Paper} data-testid="contacts-table-container">
       <Table className={classes.table} aria-label="contacts table">
         <TableHead>
           <TableRow>
             <TableCell>Avatar</TableCell>
-			<TableCell
-			
-			 > <TableSortLabel
-			 onClick={orderHandler}
-		
-			 hideSortIcon={store.orderBy.hideSortIcon}
-			 direction={store.orderBy.order || "asc"}
-			>Full name</TableSortLabel></TableCell>
+            <TableCell>
+              {" "}
+              <TableSortLabel
+                onClick={orderHandler}
+                hideSortIcon={store.orderBy.hideSortIcon}
+                direction={store.orderBy.order || "asc"}
+              >
+                Full name
+              </TableSortLabel>
+            </TableCell>
             <TableCell>Birthday</TableCell>
             <TableCell>Email</TableCell>
             <TableCell>Phone</TableCell>
@@ -68,7 +66,12 @@ export const ContactsTable = ({ data ,orderHandler}) => {
         </TableHead>
         <TableBody>
           {data.map((item) => (
-            <TableRow hover={true} size="small" key={item.login.uuid} className={classes.row}>
+            <TableRow
+              hover={true}
+              size="small"
+              key={item.login.uuid}
+              className={classes.row}
+            >
               <TableCell>
                 <Avatar
                   className={classes.small}
@@ -100,18 +103,19 @@ export const ContactsTable = ({ data ,orderHandler}) => {
 			   ${item.location.street.name} ${item.location.street.number}`}
                 />
               </TableCell>
-              <TableCell  align="right" >
-				<Button 
-				variant='outlined'
-					 style={{ borderColor:NATIONALITY_HUMAN_COLOR[item.nat], color: NATIONALITY_HUMAN_COLOR[item.nat] }}
-                  onClick={() =>
-                    (store.setNat(
-                      NATIONALITY_HUMAN_NAME[item.nat]))
-                  }
+              <TableCell align="right">
+                <Button
+                  variant="outlined"
+                  style={{
+                    borderColor: NATIONALITY_HUMAN_COLOR[item.nat],
+                    color: NATIONALITY_HUMAN_COLOR[item.nat],
+                  }}
+                  onClick={() => store.setNat(NATIONALITY_HUMAN_NAME[item.nat])}
                   className={classes.nat}
-                ><span  className={classes.nat}>
-                  {NATIONALITY_HUMAN_NAME[item.nat]}
-				  </span>
+                >
+                  <span className={classes.nat}>
+                    {NATIONALITY_HUMAN_NAME[item.nat]}
+                  </span>
                 </Button>
               </TableCell>
             </TableRow>

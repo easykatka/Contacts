@@ -1,11 +1,9 @@
-import {Contacts} from "./pages/Contacts";
+import { Contacts } from "./pages/Contacts";
 
 export function App() {
   return (
     <div>
-	
-      <Contacts/>
-
+      <Contacts />
     </div>
   );
 }

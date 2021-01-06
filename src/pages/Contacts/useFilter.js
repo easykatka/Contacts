@@ -4,20 +4,21 @@ import { useEffect, useState } from "react";
 import { useDebounce } from "./useDebounce";
 
 export const useFilter = () => {
-  const { users, filter, currentPage, orderBy, } = store;
+  const { users, filter, currentPage, orderBy } = store;
   // debounce
   const debouncedText = useDebounce(filter.searchText, 500);
   const debouncedNationality = useDebounce(filter.nationality, 500);
   //отфильтрованный результат
   const [result, setResult] = useState([]);
-
   // функция фильтра
   useEffect(() => {
     setResult(
       users
+        // фильтр по полу
         .filter(
           (user) => filter.gender === "all" || user.gender === filter.gender
         )
+        // фильтр по имени
         .filter((user) => {
           if (
             (user.name.first + " " + user.name.last)
@@ -27,6 +28,7 @@ export const useFilter = () => {
             return true;
           return false;
         })
+        // фильтр по нации
         .filter((user) => {
           if (
             NATIONALITY_HUMAN_NAME[user.nat]
@@ -37,13 +39,13 @@ export const useFilter = () => {
           return false;
         })
     );
-  }, [debouncedText, debouncedNationality, filter.gender , users]);
-  //
+  }, [debouncedText, debouncedNationality, filter.gender, users]);
+
   useEffect(() => {
     setResult(users);
   }, [users]);
 
-
+  // сортировка по имени
   const sortFunc = () => {
     switch (orderBy.order) {
       case "asc":
@@ -59,14 +61,14 @@ export const useFilter = () => {
     }
   };
   const orderHandler = () => {
-	  orderBy.order==="" ? store.setOrderBy("asc" , false):
-	  orderBy.order==="asc" ? store.setOrderBy('desc' , false): store.setOrderBy('' , true)
-		
-	  }
-
+    orderBy.order === ""
+      ? store.setOrderBy("asc", false)
+      : orderBy.order === "asc"
+      ? store.setOrderBy("desc", false)
+      : store.setOrderBy("", true);
+  };
   const sortedUsers = sortFunc();
-
-  // фильтр по страницам
+  // пацинация
   const pageSize = 8;
   const pagesCount = Math.ceil(sortedUsers.length / pageSize);
   const indexOfLastPage = currentPage * pageSize;

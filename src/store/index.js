@@ -27,7 +27,7 @@ class Store {
       const response = await fetch("https://randomuser.me/api/?results=50");
       const { results, error } = await response.json();
       if (error) {
-        throw new Error();
+        throw new Error(error);
       }
       runInAction(() => {
         this.users = results;
